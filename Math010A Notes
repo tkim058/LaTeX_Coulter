@@ -1,0 +1,1899 @@
+%change section to theorem environments
+%correct references
+%correct overfull hboxes
+
+\date{}
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+
+\usepackage{} %inserting graphics
+\graphicspath{ {images/} }
+
+\usepackage{enumerate, enumitem}
+\usepackage{cancel}
+\usepackage{xfrac}
+\usepackage{caption}
+
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{lmodern}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\distance}{\mathrm{d}}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{corollary}{theorem}
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\title{Calculus of Several Variables}
+\author{Coulter Muvlihill}
+\date{April 2017}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+
+
+\tableofcontents
+
+
+
+\newpage
+
+\part{Textbook Notes}
+
+\section{Chapter 1 Notes}
+
+\subsection{Vector in Two- and Three-Dimesional Space}
+
+
+
+\subsubsection{Vector Addition and Scalar Multiplication}
+
+
+\begin{center}
+
+\vspace{5 mm}
+
+\textbf{Addition of vectors} \break
+
+$(a_1,a_2,a_3) + (b_1,b_2,b_3) = (a_1 + b_1,a_2+ b_2,a_3+b_3)$ \break
+
+\textbf{Multiplication of scalars} \break
+
+$2(4,e,1) = ( 2 * 4, 2 * e, 2 * 1)$
+
+\end{center}
+
+\begin{example}
+
+Perform the vector calculation.
+
+$3<1,-7,2>-2<-5,0,2>$
+
+\begin{solution}
+
+Perform the arithmetic.
+
+ = $<3,-21,6>-<-10,0,4>$
+
+ = $<13,-21,2>$
+
+\end{solution}
+
+
+\end{example}
+
+\subsubsection{Geometry of Vector Operations}
+
+\begin{center}
+
+\textbf{Vectors are arrows emanating from the origin} \break
+
+\includegraphics{1} \break
+
+\textbf{Addition of two vectors} \break
+
+\includegraphics{2} \break
+
+\textbf{Scalar Multiplication of Vectors} \break
+
+\includegraphics{3} \break
+
+\textbf{Subtraction of vectors} \break
+
+\includegraphics{4} \break
+
+\begin{example}
+
+Find the vector from $(-2,3)$ to $(1,1)$
+
+\begin{solution}
+
+Subtract the first vector from the second vector. 
+
+$= <1 + (+2),1-3>$
+
+$= <3,-2>$
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Final Examples}
+
+\begin{example}
+
+$(4,5,6)-(6i+5j)$
+
+\begin{solution}
+
+$(4-6,5-5,6) = (-2,0,6)$
+
+\end{solution}
+
+\end{example}
+
+
+\end{center}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%STOPPED SECTIONING
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Lecture
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\subsection{The Inner Product, Length, and Distance}
+
+\subsubsection{The inner product}
+
+\begin{center}
+
+\textbf{${a,b}$ and $a*b$ are the same thing}
+
+\end{center}
+
+\begin{example} 
+
+Multiply $a*b$
+
+$
+a = 3i + j - 2k$
+
+$b = i - j + k$
+
+    \begin{solution}
+    
+    $ 
+    a * b = {a,b} = 3 * 1 + 1 * (-1) + (-2) * 1 = 3 - 1 - 2 = 0$
+    
+    \end{solution}
+
+\end{example}
+
+\subsubsection{Unit vectors}
+
+\begin{center}
+
+\textbf{To obtain a unit vector $u$, divide $a$ by $||a||$} \break
+
+Where $v = 2i + 3j - \frac{1}{2}k$, $||v|| = \sqrt{2^2+3^2+(\frac{1}{2})^2} = \frac{1}{2}\sqrt{53}$ \break
+
+This is also known as normalizing a vector. \break
+
+\end{center}
+
+\begin{example}
+
+Find u when
+
+$v =  2i + 3j - \frac{1}{2}k$
+
+$||v|| = \frac{1}{2}\sqrt{53}$
+
+\begin{solution}
+
+$u = \frac{1}{v}||v||$
+
+$ u = \frac{4}{\sqrt{53}}i +  \frac{6}{\sqrt{53}}j - \frac{1}{\sqrt{53}}$
+
+\end{solution}
+
+\end{example}
+
+\subsection{Length}
+
+\begin{center}
+
+\textbf{The length of a vector a is $||a||$} \break
+
+\end{center}
+
+\begin{example} Find a vector of length 3 that is parallel to $<1,1,01>$
+
+\begin{solution}
+
+Find the length of the vector $\vec{a}$ and multiply it by $\vec{a}$
+
+$\vec{a} = <1,1,-1>$
+
+$||\vec{a}|| = \sqrt{1 + 1 + 1} = \sqrt{3}$
+
+$\sqrt{3}<1,1,-1>$
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Distance}
+
+\begin{center}
+
+\textbf{The distance between the endpoints of $a$ and $b$ is $||a-b||$} \break
+
+\end{center}
+
+\begin{example}
+
+Find the (shortest) distance from the point $(-2,1)$ to the line given by the vector equation $<x,y> = <\frac{1}{2},\frac{1}{2}>t + <0,-3>$
+
+\begin{solution} To find the solution, find the distance between the te slope and the point on a line.
+
+$A = <0,-3>$
+
+$B = <-2,1>$
+
+$\vec{AB} = <-2,1+(+3)> = <-2,4>$
+
+$\frac{<-2,4><\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}>}{<\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}><\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}>} <\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}>$
+
+$= \frac{\frac{-2}{\sqrt{2}}\frac{4}{\sqrt{2}}}{\frac{1}{2}+\frac{1}{2}}<\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}>$
+
+$=\frac{2}{\sqrt{2}}<\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}>$
+
+$=<1,1>$
+
+$\vec{b}$-vector
+
+$=<-2,4>-<1,1>$
+
+$=<-3,3>$
+
+$||b|| = \sqrt{9+9} = \sqrt{18}$
+
+\end{solution}
+
+\end{example}
+
+
+
+
+
+\subsubsection{The angle between two vectors}
+
+\begin{center}
+
+\textbf{The angle between vectors $a$ and $b$ is $\theta = cos^{-1}(\frac{a*b}{||a||||b||})$} \break
+
+\end{center}
+
+\begin{example}
+
+Find the angle between the two vectors $<1,\sqrt{3}>$ and $<\sqrt{3},1>$
+
+\begin{solution} Using $\vec{a} \vec{b} = ||\vec{a}||||\vec{b}||cos\theta $
+
+$a = <1,\sqrt{3}>$
+
+$b = <\sqrt{3},1>$
+
+$\vec{a} * \vec{b} = <1,\sqrt{3}> * <\sqrt{3},1$
+
+$\sqrt{3} + \sqrt{3} = 2\sqrt{3}$
+
+$||\vec{a}|| = \sqrt{1 + 3} = 2$
+
+$||\vec{a}|| = \sqrt{1 + 3} = 2$
+
+$2\sqrt{3} = 4cos\theta$
+
+$\frac{\sqrt{3}}{2} = cos\theta$
+
+$\theta = \frac{\pi}{6}$
+
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Orthogonal Projection}
+
+\begin{center}
+
+\textbf{$p$ is the orthogonal projection of $v$ on $a$}
+
+$p = \frac{a * v}{{||a||}^2}a$
+
+\includegraphics{5}
+
+\end{center}
+
+\begin{example}
+
+Find the orthogonal projection of $v$ onto $a$ where
+
+$a = i - 2j$
+
+$v = i + j$
+
+\begin{solution}
+
+$\frac{a * v}{a * a}a = \frac{1 - 2}{1 + 4}(i-2j) = -\frac{1}{5}(i-2j)$
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Section Examples}
+
+\begin{example} Find a way of representing the ilne that goes through the points (-2,1,2) and (3,-1,-5).
+
+\begin{solution} Subtract the first vector from the second vector, and plug it into a linear equation. 
+
+$A = <-2,1,2>$
+
+$B = <3,-1,-5>$
+
+$\vec{AB} = <3-(-2),-1-1,-5-2>$
+
+$ = <5,-2,-7>$
+
+$<x,y,z> = <5,-2,-7>t + <-2,1,2>$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Calculate $<1,3,-2>*<-4,1,0>$
+
+\begin{solution} Find the determinant of the matrix by making the top row $\vec{i}$ $\vec{j}$ $\vec{k}$ and the bottom rows the vectors themselves.
+
+\[
+\begin{bmatrix}
+    \vec{i} & \vec{j} & \vec{k} & | & \vec{i} & \vec{j} \\
+    1 & 3 & -2 & | & 1 & 3 \\
+    -4 & 1 & 0 & | & -4 & 1 \\
+\end{bmatrix}
+\]
+
+$0 + 8\vec{j} + \vec{k} + 12\vec{k} + 2\vec{i}$
+
+$2\vec{i} + 8 \vec{j} + 13\vec{k} = <2,8,13>$
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example} Compute the area of the triangle with vertices $(1,1)$, $(-1,2)$, $(-2,1)$.
+
+\begin{solution}
+
+$A = (1,1)$, $B = (-1,2)$, $C = (-2,-1)$
+
+$\vec{AB} = (-1+1,2-1) = <-2,1>$, $||\vec{AB}|| = \sqrt{4 + 1} = \sqrt{5}$
+
+$\vec{AC} = (-2+-1,-1+-1) = <-3,-2>$, $||\vec{AC}|| = \sqrt{9 + 4} = \sqrt{13}$
+
+$||\vec{A} * \vec{B}|| = ||\vec{A}||||\vec{B}||cos\theta$
+
+Needs to be finished
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find a line that goes through the points $(2,1,2)$ and $(3,-1,5)$.
+
+\begin{solution} To find the slope, subtract the first vector from the second and make the b value the first. 
+
+$a = (2,1,2)$
+
+$b = (3,-1,5)$
+
+$\vec{ab} = <3-2,-1+-1,5-2> = <1,-2,3>$
+
+Line: $<1,-2,3>t + <2,1,2>$
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+Find a line through $(1,2,3)$ that is parallel to the line given by the parametric equations $x = 3t-5,y=-9t+1,z=-t$
+
+\begin{solution} 
+
+$= <3,-9,-1>t+<-5,1,0>$
+
+Parallel line
+
+$= <3,-9,-1>t + <1,2,3>$
+
+\end{solution}
+
+\end{example}
+
+
+
+
+
+
+\subsection{Matrices, Determinants, and the Cross Product}
+
+\subsubsection{2x2 Matrices}
+
+\begingroup
+
+\centering
+
+\[
+\begin{bmatrix}
+    a_{11}   & a_{12}  \\
+    a_{21}   & a_{22}  \\
+\end{bmatrix}
+\]
+
+\endgroup
+
+\begin{center}
+
+\textbf{The determinant of the above matrix is $a_{11}a_{21}-a_{12}a_{21}$}
+
+\end{center}
+
+
+
+
+\subsection{Cylindrical and Spherical Coordinates}
+
+\begin{center}
+
+\textbf{The polar coordinates of $(x,y)$ are $(r,\theta)$}
+
+\includegraphics{6} \break
+
+The cylindrical coordinates $(r,\theta,z)$ of a point $(x,y,z)$ can be found with 
+
+$ x = rcos(\theta)$ 
+
+$ y = rsin(\theta)$ 
+
+$z = z$ \break
+
+$r$ can be found by 
+
+r = $\sqrt{x^2+y^2}$ \break
+
+$\theta$ can be found by 
+
+$\theta = tan^{-1}(\frac{y}{x})$ \break
+
+\end{center}
+
+\subsection{n-Dimensional Euclidean Space}
+
+\subsubsection{General Matrices}
+
+\begin{example} Multiply the matrix by a number
+
+\begin{solution}
+
+\[3
+\begin{bmatrix}
+    1   & -1  \\
+    0   &  1  \\
+\end{bmatrix}
+=
+ \begin{bmatrix}
+    3   & -3  \\
+    0   &  3  \\
+\end{bmatrix}
+ \] \break
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Multiply a matrix by another matrix}
+
+\begin{center}
+
+\textbf{To multiply two matrices, find the dot product of each of the rows}
+
+\includegraphics{7}
+
+\end{center}
+
+\begin{example} Find AB and BA. 
+
+\[A = 
+\begin{bmatrix}
+    1 & 0 & 3 \\
+    2 & 1 & 0 \\
+    1 & 0 & 0 \\
+\end{bmatrix}
+, \; B = 
+ \begin{bmatrix}
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 1 & 1 \\
+\end{bmatrix}
+ \]
+ 
+
+
+\begin{solution}
+
+ \[ AB =
+ \begin{bmatrix}
+    0 & 4 & 3 \\
+    1 & 2 & 0 \\
+    0 & 1 & 0 \\
+\end{bmatrix}
+, \; BA = 
+ \begin{bmatrix}
+    2 & 1 & 0 \\
+    1 & 0 & 3 \\
+    3 & 1 & 0 \\
+\end{bmatrix}
+ \]
+
+\end{solution}
+
+\end{example}
+
+
+
+
+\begin{example} Find AB. 
+
+\[A = 
+\begin{bmatrix}
+    2 & 0 & 1 \\
+    1 & 1 & 2 \\
+\end{bmatrix}
+, \; B = 
+ \begin{bmatrix}
+    1 & 0 & 2 \\
+    0 & 2 & 1 \\
+    1 & 1 & 1 \\
+\end{bmatrix}
+ \]
+ 
+
+
+\begin{solution}
+
+\[ AB =
+ \begin{bmatrix}
+    3 & 1 & 5 \\
+    3 & 4 & 5 \\
+\end{bmatrix}
+\]
+
+\end{solution}
+
+\end{example}
+
+
+
+
+
+
+\begin{example} Find AB and BA. 
+
+\[A = 
+\begin{bmatrix}
+    1 \\
+    2 \\
+    1 \\
+    3 \\
+\end{bmatrix}
+, \; B = 
+ \begin{bmatrix}
+    2 & 2 & 1 & 2 \\
+\end{bmatrix}
+ \]
+ 
+
+
+\begin{solution}
+
+ \[ AB =
+ \begin{bmatrix}
+    2 & 2 & 1 & 2 \\
+    4 & 4 & 2 & 4 \\
+    2 & 2 & 1 & 2 \\
+    6 & 6 & 3 & 6 \\
+\end{bmatrix}
+, \; BA = 
+ \begin{bmatrix}
+    13 \\
+    
+\end{bmatrix}
+ \]
+
+\end{solution}
+
+\end{example}
+
+\subsubsection{Properties of Matrices}
+
+\begin{center}
+
+\textbf{Matrix multiplication is not commutative - $AB \neq BA$} \break
+
+\textbf{The inverse of a matrix may be found with some confusing processes by setting the matrix side by side with an identity matrix. Figure out this process later.} \break
+
+\end{center}
+
+
+
+\part{Lecture Notes}
+
+\section{Lectures 1-3: Vectors/Defining vector addition}
+
+\subsection{Vector addition}
+
+Let $\vec{A} = (a_1,a_2)$ and $\vec{b} = (b_1,b_2)$
+
+\begin{itemize}
+    \item Algebraic definition: $\vec{a} + \vec{b} = (a_1+b_1,a_2+b_2)$
+    \item Geometric definition: "head to head"
+\end{itemize}
+
+\subsection{Vector Properties}
+
+Properties of Vectors
+
+\begin{itemize}
+    \item $\vec{a}+\vec{v} = \vec{b}+\vec{a}$
+    \item $\vec{a}+(\vec{b}+\vec{c}) = (\vec{a}+\vec{b}) + \vec{c}$
+    \item A special vector, denoted $\vec{o}$ with the property that $\vec{a}+\vec{o}=\vec{a}$ for all vector $\vec{a}$
+\end{itemize}
+
+\subsection{Scalar Multiplication}
+
+Let $\vec{a} = (a_1,a_2,a_3)$, let $k \epsilon R$ be a scalar. Then the scalar product $k\vec{a} = (ka_1,ka_2,ka_3)$
+
+If $c$ is a scalar and $\vec{a}$ is a vector, we define c$\vec{a}$ to be the vector that is $|c|$ times as long as $\vec{a}$ with the same direction as $\vec{a}$ if $c$ is positive, but with the opposite direction if $c$ is negative.
+
+\begin{example}
+
+Let $\vec{a} = (1,2), k =2$
+
+Find $k\vec{a}$. 
+
+\begin{solution}{Distribute $k$ to $\vec{a}$}
+
+$\vec{a} = (1,2)$
+
+$k = 2$
+
+$2(1,2) = (2,4)$
+
+$k\vec{a} = (2,4)$
+
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Let $\vec{a} = (1,2), c = -2$
+
+Find $c\vec{a}$
+
+\begin{solution}{Distribute $c$ to $\vec{a}$}
+
+$\vec{a} = (1,2)$
+
+$c = -2$
+
+$-2(1,2) = (-2,4)$
+
+$c\vec{c} = (-2,-4)$
+
+\end{solution}
+
+\end{example}
+
+
+\subsection{The arithmetic of vector subtraction}
+
+$\vec{b}-\vec{a}= \vec{b}+(-1)\vec{a}$
+
+\subsection{Final Examples}
+
+\begin{example}
+
+Let $p = (-2,-1), Q = (-3,-3), R = (-1,-4)$
+
+1. Find vector $\vec{V}$ joining $P$ to $R$
+
+2. Find vector $\vec{W}$ joining $Q$ to $R$
+
+3. Find vector $\vec{U}$ joining $R$ to $Q$
+
+4. Calculate $\vec{V}+\vec{W}+\vec{U}$
+
+\begin{solution}{Find the components of these vectors}
+
+1. $\vec{V} = (-3-(-2),-3-(-1)) = (-1,-2)$
+
+2. $\vec{W} = (-1-(-3),-4-(-3)) = (2,-1)$
+
+3. $\vec{U} = (-1,3)$
+
+4. $\vec{V}+\vec{W}+\vec{U} = (-2,-1)+(2,-1)+(-1,3) = (-1,1)$
+
+\end{solution}
+
+\end{example}
+
+
+\subsection{Equation of Lines}
+
+\begin{itemize}
+    \item Point - direction form of a line
+    \item The equation of the line $l$ through the tip of $\vec{a}$ and pointing in the direction of the $\vec{v}$ is $l(t) = \vec{a}+t$
+\end{itemize}
+
+
+
+
+\section{Lecture Notes: Inner Product, Length Distance(Lecture 4)}
+
+\subsection{Dot product/Inner Product}
+
+\begin{itemize}
+    \item Inner product may also be called a dot product
+\end{itemize}
+
+\begin{definition}{Inner Product}
+
+Let $\vec{a} = (a_1,a_2,a_3)$ and $\vec{b} = (b_1,b_2,b_3)$
+
+The dot product(or inner or scalar) product of $\vec{a}$ and $\vec{b}$, denoted $\vec{a}*\vec{b}$ is 
+
+$\vec{a}*\vec{b} = a_1b_1+a_2b_2+a_3b_3$
+
+Procedure takes two vectors and produces a signal real number
+
+$\vec{a} = (a_1,a_2), \vec{b} = (b_1,b_2)$
+
+In $R^2$, $\vec{a}*\vec{b}= a_1b_1+a_2b_2$
+
+\end{definition}
+
+\begin{example}
+
+$(1,-2,5)*(2,1,3)$
+
+\begin{solution}
+
+$= 12 + -2(1)+5*3 = 15$
+
+\end{solution}
+
+\end{example}
+
+\subsection{Properties of dot product}
+
+\begin{itemize}
+    \item $\vec{a}*\vec{a} \geq 0$, $\vec{a}*\vec{a} = 0$ if and only if $\vec{a} = \vec{0}$
+    \item $(c*\vec{a})*\vec{b} = c(\vec{a}*\vec{b})$, $\vec{a}*(c\vec{b}) = c(\vec{a}*\vec{b})$
+    \item $\vec{a}*(\vec{b}+\vec{c})$ = $\vec{a}*\vec{b}+\vec{a}*\vec{c}$
+    \item $\vec{a}*\vec{b}=\vec{b}*\vec{a}$
+\end{itemize}
+
+\subsection{Length}
+
+\begin{definition}{Length in 2 dimensional space}
+
+If $\vec{a} = (a_1,a_2)$, then the length of $\vec{a}$ is also called the norm or magnitude. This is denoted as $||\vec{a}||$, and is found by $\sqrt{a_1^2+a_2^2}$. 
+
+\end{definition}
+
+\begin{definition}{Length in 3 dimensional space}
+
+If $\vec{a} = (a_1,a_2,a_3),$ then $||\vec{a}||$ = $\sqrt{a_1^2,a_2^2,a_3^2}$. 
+
+\end{definition}
+
+\begin{definition}{Vector with norm 1}
+
+Vectors with norm 1 are called unit vectors. Ex: $\vec{i} = (1,0,0)$. $||\vec{i}|| = \sqrt{1^2+0^2+0^2} = 1$. 
+
+A unit vecotr, (ie a vector of length 1) in the direction of a vector $\vec{a}$ is given by $\frac{\vec{a}}{||\vec{a}||}$ 
+
+When we divide $\vec{a} by ||\vec{a}||$ we say that we have normalized $\vec{a}$
+
+\end{definition}
+
+\begin{example}
+
+Let $\vec{a} = (1,2).$ Find unit vector in the direction of $\vec{a}$. 
+
+\begin{solution}
+
+$||\vec{a}|| = \sqrt{1^2+2^2} = \sqrt{5}$
+
+$\frac{\vec{a}}{||\vec{a}||} = \frac{(1,2)}{\sqrt{5}} = (\frac{1}{\sqrt{5}},\frac{2}{\sqrt{5}})$
+
+\end{solution}
+
+\end{example}
+
+\subsection{The angle between two vectors}
+
+\begin{theorem}{The angle between two vectors}
+
+Let $\vec{a}$ and $\vec{b}$ be two vectors and $\theta$, where $0 \leq \theta \leq \pi$ be the angle between them. 
+
+$\vec{a}*\vec{b}= ||\vec{a}||||\vec{b}||cos(\theta)$
+
+It follows that the angle between vectors $\theta = cos^-1(\frac{\vec{a}*\vec{b}}{||\vec{a}||||\vec{b}||})$
+
+\end{theorem}
+
+\begin{example}
+
+Find the angle between $\vec{a} = (1,0,1)$ and $\vec{b} = (0,1,1)$
+
+\begin{solution}
+
+
+
+\end{solution}
+
+\end{example}
+
+
+
+\section{Lecture Notes: Orthogonal Projection, Cross Product}
+
+\subsection{Orthogonal Projection}
+
+\begin{definition}{Orthogonal Projection}
+
+The orthogonal projection of $\vec{V}$ on $\vec{a}$ is the vector $\vec{v}= \frac{\vec{a}*\vec{v}}{||\vec{a}||^2}\vec{a}=\frac{\vec{a}*\vec{v}}{\vec{a}*\vec{a}}\vec{a}$
+
+\end{definition}
+
+\subsection{Examples}
+
+\begin{example}
+
+Find the orthogonal projection of $\vec{i} + \vec{j}$ on $\vec{i}-2\vec{j}$
+
+\begin{solution}
+
+Set $\vec{v} = \vec{i}+\vec{j}, \vec{a}=\vec{i}-2\vec{j}$
+
+$\vec{v}=\frac{(1,-2,0)*(1,1,0)}{(1,-2,0)*(1,-2,0)}(1,-2.0)$
+
+$=\frac{1*1+(-2)*1+0*0}{1+4}*(1,-2,0)$
+
+$=\frac{-1}{5}(1,-2,0)$
+
+$=(-\frac{1}{5},\frac{2}{5},0)$ or $-\frac{1}{5}\vec{i}+\frac{2}{5}\vec{j}$
+
+
+\end{solution}
+
+
+\end{example}
+
+\subsection{Cross Product}
+
+\begin{definition}
+
+Suppose that
+
+$\vec{a} = (a_1,a_2,a_3) = a_1\vec{i}+a_2\vec{j}+a_3\vec{k}$
+
+$\vec{b} = (b_1,b_2,b_3) = b_1\vec{i}+b_2\vec{j}+b_3\vec{k}$
+
+are vectors in $R^2$
+
+\end{definition}
+
+\begin{definition}{The Cross Product or Vector Product}
+
+The cross product of $\vec{a}$ and $\vec{b}$ denoted $\vec{a}*\vec{b}$ is defined to be the vector
+
+\[
+\begin{bmatrix}
+    \vec{i}   & \vec{j} & \vec{k} \\
+    a_{1}   & a_{2} & a_{3}  \\
+    b_{1}   & b_{2} & b_{3}  \\
+\end{bmatrix}
+\]
+
+\end{definition}
+
+\begin{example}
+
+\[
+\begin{bmatrix}
+    \vec{i}   & \vec{j} & \vec{k}  \\
+    1  & 0 & 0 \\
+    0 & 1 & 0 \\
+\end{bmatrix}
+\]
+
+
+\begin{solution}{Take the determinant of the matrix}
+
+$0\vec{i} - 0\vec{j} + 1\vec{k} = \vec{k}$
+
+\end{solution}
+
+\end{example}
+
+\subsection{Properties of Cross Products}
+
+\begin{itemize}
+    \item $\vec{a}*\vec{b}$ is perpendicular to $\vec{a}$ and $\vec{v}$ and the triple $(\vec{a},\vec{b},\vec{a}*\vec{b})$ obeys the right-hand rule
+    \item $||\vec{a}*\vec{b}|| = ||\vec{a}||||\vec{b}||sin(\theta)$
+    \item The area of the parallelogram spanned by two vectors $\vec{a}$ and $\vec{b}$
+    \item $|(\vec{a}*\vec{b})*\vec{c}| =$ Volume of parallelogram
+\end{itemize}
+
+\subsection{Algebraic Rules of Cross Products}
+
+\begin{itemize}
+    \item $\vec{a}*\vec{b}=\vec{0}$ if and only if $\vec{a}$ and $\vec{b}$ are parallel or $\vec{a}$ or $\vec{b}$ is zero
+    \item $\vec{a}*\vec{b} = -\vec{b}*\vec{a}$
+    \item $\vec{a}*(\vec{b}+\vec{c}) = \vec{a}*\vec{b}+\vec{a}*\vec{c}$
+    \item $(\vec{a}+\vec{b})*\vec{c}=\vec{a}\vec{c}+\vec{b}*\vec{c}$
+    \item $(c\vec{a})*\vec{b}=c(\vec{a}*\vec{b})$
+\end{itemize}
+
+
+\begin{example}
+
+Find a unit vector orghogonal to the vectors $\vec{i}+\vec{j}$ and $\vec{j}+\vec{k}$
+
+\begin{solution}
+
+$\vec{a} = \vec{i}+\vec{j} = (1,1,0)$
+
+$\vec{b} = \vec{j}+\vec{k} = (0,1,1)$
+
+A vector perpendicular to both $\vec{a}$ and $\vec{b}$ is their cross product:
+
+$\vec{c} = \vec{b}*\vec{a} = $
+
+\[
+\begin{bmatrix}
+    \vec{i}   & \vec{j} & \vec{k}  \\
+    0 & 1 & 1 \\
+    1 & 1 & 0 \\
+\end{bmatrix}
+\]
+
+$=(-1,1,-1)$
+
+Because $||c|| = \sqrt{1^2+1^2+1^2} = \sqrt{3}$
+
+The vector $\frac{1}{\sqrt{3}} * (-1,1,-1) = (-\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}})$ is a unit vector perpendicular. 
+
+\end{solution}
+
+\end{example}
+
+\subsection{Equations in Planes}
+
+\begin{definition}{Plane}
+
+The plane $\Pi$ is the set of all points P(x,y,z) such that $\vec{p.p}$ is perpendicular to $\vec{n}$.  
+
+\end{definition}
+
+
+\begin{definition}{Equation of Planes}
+
+Let $P_0(X_0,Y_0,Z_0)$
+
+$\vec{n} = (A,B,C)$
+
+$A(X-X_0)+B((Y_1-Y_0)+C(Z-Z_0) = 0$
+
+$\rightarrow Ax + By + Cz + D = 0$ where $D = -Ax_0-By_0-Cz_0$
+
+\end{definition}
+
+\begin{example}
+
+Determine an equation for the plain through the point $(3,2,1)$ and is perpendicular to $n = (2,-1,4)$. 
+
+\begin{solution}
+
+Let $P = (1,1,1), Q = (2,0,0), R = (1,1,0)$
+
+$\vec{PR} = (1-1,1-1,0-1) = (0,0,-1)$
+
+$\vec{PQ} = (1,-1,-1)$
+
+$\vec{n} = \vec{PR}*\vec{PQ}$
+
+\[
+\begin{bmatrix}
+    \vec{i}   & \vec{j} & \vec{k}  \\
+    0 & 0 & -1 \\
+    1 & -1 & -1 \\
+\end{bmatrix}
+\]
+
+$ = -\vec{i} - \vec{j} + 0\vec{k} = (-1,-1,0)$
+
+The equation is given by 
+
+$(-1(x-1+-1(y-1)+0(z-1) = 0$
+
+
+\end{solution}
+
+\end{example}
+
+\begin{definition}{Distance Point to Plane}
+
+$d = \frac{|Ax_1+By_1+Cz_1+D|}{\sqrt{A^2+B^2+C^2}}$
+
+\end{definition}
+
+
+\begin{example}
+
+$||Proj_{\vec{P1P2}}\vec{P1P2}|| = \sqrt{(\frac{10}{3})^2+(\frac{-10}{3})^2+(\frac{5}{3})^2} = 5$
+
+\end{example}
+
+
+
+\section{Cylindrical and spherical coordinate systems}
+
+\subsection{Polar Coordinates}
+
+\begin{definition}{Cylindrical Coordinates}
+
+The cylindrical coordinates $(r,\thet,z)$ of a point $(x,y,z)$ are defied by $x = rcos(\theta), y = rsin(\theta),z=z$
+
+\end{definition}
+
+\begin{definition}{Spherical Coordinates}
+
+The spherical coordinates of the point $(x,y,z)$ are the triples $(p,\theta,\phi)$ defined as $x = \rho sin \phi cos \theta ,y= \rho sin \phi sin \theta, z = \rho cos \phi$
+
+\end{definition}
+
+
+
+\subsection{Parametric Intersection of the planes}
+
+\begin{example}
+
+$\pi_1 * x+y+z-2 = 0$
+
+$\pi_2i -x+y-z+2=-$
+
+\begin{solution}
+
+
+
+\end{solution}
+
+\end{example}
+
+
+
+\section{Chapter 2: Differentiation}
+
+\subsection{Limits in Math 9A}
+
+\begin{definition}{The Equation of a Limit}
+
+$lim_{x \rightarrow a}f(x) = L$
+
+Means that we can make $|f(x)-L|$ arbitrarily small by keeping $|x-a|$ sufficiently small(but non-zero)
+
+\end{definition}
+
+\begin{example}
+
+$lim_{x\rightarrow 0} \frac{|x|}{x}$
+
+\begin{solution}
+
+$lim_{x\rightarrow 0^+} \frac{x}{x}= 1$
+
+$lim_{x\rightarrow 0^-} \frac{x}{x}= -1$
+
+Limit does not exist
+
+\end{solution}
+
+\end{example}
+
+\section{Limits in Math 10A}
+
+\begin{example}
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{x^2-y^2}{x^2+y^2}$
+
+\begin{solution}{Solution 1 - Test the limit in all directions}
+
+x axis
+
+$(x,y) \rightarrow (0,0)$ along the x-axis
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{x^2-y^2}{x^2+y^2}$ = $lim_{(x,y) \rightarrow (0,0)} \frac{x^2-0^2}{x^2+0^2} = 1$
+
+y axis
+
+$(x,y) \rightarrow (0,0)$
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{x^2-y^2}{x^2+y^2}$ = $lim_{(x,y) \rightarrow (0,0)} \frac{0^2-y^2}{0^2+y^2} = -1$
+
+As a result, the limit of f as $(x,y) \rightarrow (0,0)$ does not exist, since f has different "limiting value."
+
+\end{solution}
+
+\begin{solution}{Solution 2 - Polar Coordinates}
+
+$\frac{x^2-y^2}{x^2+y^2} = \frac{(rcos(\theta))^2-(rsin(\theta))^2}{(rcos(\theta))^2+(rsin(\theta))^2} = \frac{cos^2(\theta)-sin^2(\theta)}{cos^2(\theta)+sin^2(\theta)}$
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{x^2-y^2}{x^2+y^2}$ = $lim_{r \rightarrow 0} cos^2(\theta)-sin^2(\theta)$
+
+We must have $r \rightarrow -$ there need be no restriction on $\theta$
+
+Thus we see that the limit does not exist
+
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{sin(x^2+y^2)}{x^2+y^2}$
+
+\begin{solution}
+
+$lim_{r \rightarrow 0} \frac{sin(rcos(\theta))^2+(rsin(\theta))^2}{(rcos(\theta))^2+(rsin(\theta))^2}$
+
+$lim_{r \rightarrow 0} \frac{sin(r^2)}{r^2}=lim_{r \rightarrow 0} \frac{cos(r^2)*2r}{2r}$
+
+\end{solution}
+
+\end{example}
+
+\begin{definition}{Continuity}
+
+$lim_{x\rightarrow a}f(x) = f(a)$
+
+\end{definition}
+
+\begin{example}
+
+Can $f(x,y) = \frac{sin(x+y)}{x+y}$ be made continuous by suitably defining it at $(0,0)$?
+
+\begin{solution}
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{sin(x+y)}{x+y} = lim_{r \rightarrow 0} \frac{sin(rcos(\theta) + rsin(\theta)}{rcos(\theta)+rsin(\theta)}$
+
+L'Hopital
+
+$lim_{r \rightarrow 0} = \frac{cos(rcos(\theta)+rsin(\theta)*(cos(\theta)+sin(\theta)}{cos(\theta)+sin(\theta)}$
+
+$lim_{r \rightarrow 0} cos(rcos(\theta)+rsin(\theta)) = cos(0) = 1$
+
+Thus if we set $f(0,0) = 1$ then $lim_{(x,y) \rightarrow (0,0)} f(x,y) = f(0,0)$ and f is continuous at $(0,0)$.
+
+\end{solution}
+
+
+
+\end{example}
+
+\begin{example}
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{e^{xy}}{x+1} = \frac{e^0}{0 + 1} = \frac{1}{1} = 1$
+
+\end{example}
+
+
+\begin{example}
+
+$lim_{(x,y) \rightarrow (0,0)} \frac{e^{xy}-1}{y}$
+
+\begin{solution}
+
+$\frac{e^0 - 1}{0} = \frac{0}{0}$
+
+Actual solution
+
+$lim_{r \rightarrow 0} \frac{e^{r^2cos(\theta)sin(\theta)}-1}{rsin(\theta)}$
+
+$lim_{r \rightarrow 0} \frac{e^{r^2cos(\theta)sin(\theta)}*2rcos(\theta)sin(\theta)}{sin(\theta)}$
+
+$\frac{e^0*2*0*cos(\theta)}{1} = 0$
+
+\end{solution}
+
+
+\end{example}
+
+\section{Partial Derivatives}
+
+\begin{definition}{The partial derivative}
+
+The partial derivative of $f$ with respect to $x_i$ is $\frac{df}{dx_2} = lim_{h \rightarrow 0} \frac{f(x_1,x_2...x_2+h,...x_n)-f(x_1,x_2,...x_n}{h}$
+
+the partial derivative is the rate of change of f when all variables, except the specified one $x_2$, are held fixed.
+
+1. $\frac{df}{dx} = lim_{h \rightarrow 0} \frac{f(x+h,y)-f(x,y)}{h}$
+
+2. $\frac{df}{dy} = lim_{h \rightarrow 0} \frac{f(x,y+h)-f(x,y)}{h}$
+
+\end{definition}
+
+\begin{example}
+
+Let $f(x,y) = x^2y+y^3$
+
+Find $\frac{df}{dx}$ and $\frac{df}{dy}$
+
+\begin{solution}
+
+$\frac{df}{dx} = lim_{h \rightarrow 0} \frac{[(x+h)^2y+y^3]-[x^2+y^3]}{h}$
+
+$lim_{h \rightarrow -} \frac{2xhy+h^2y}{h}= lim_{h \rightarrow 0} \frac{2xy+hy}{1} = 2xy$
+
+To find $\frac{df}{dx}$, we hold $y$ constant, and differentiate only with respect to $x$, $\frac{df}{dx}(x^2y+y^3) = 2*x*y$
+
+
+\end{solution}
+
+\begin{solution}
+
+$\frac{df}{dy} = \frac{d}{dy(x^2y+y^3)} = x^2+3y^2$
+
+\end{solution}
+
+\end{example}
+
+
+\section{2.4 Introduction to Paths and Curves}
+
+\begin{definition}
+
+Let $I = [a,b]$ 
+
+\begin{itemize}
+    \item a path in $R^n$ is a continuous function $\vec{c}(t):[a,b] \rightarrow R^n$
+    \item The collection C of points $\vec{c}$ as t values in $[a,b]$ is called a curve
+\end{itemize}
+
+
+\end{definition}
+
+\begin{definition}
+
+Let $\vec{c}(t) = (x(t),y(t),z(t))$.
+
+The velocity of $\vec{c}(t)$ at the time t is defined by $\vec{c}(t) = (x'(t),y'(t),z'(t))$
+
+The speed of the path $\vec{c}(t)$ is $s = ||\vec{c}(t)||,$ the length of the velocity vector
+
+
+\end{definition}
+
+
+\begin{definition}{Tangent Vector}
+
+The velocity $\vec{c}'(t)$ is a vector tangent to the path $\vec{c}(t)$ at time t.
+
+\end{definition}
+
+\section{Dank Derivatives}
+
+\begin{example}
+
+Suppose $f(x,y) = e^{xy}$ is a temp. function on $R^2$ and $\vec{c}(t) = (3t^2,t^3)$. Find $\frac{d}{dt}f(\vec{c}(t))$
+
+\begin{solution}
+
+Solution 1: $e^{3t^5}(5t^4)$
+
+\end{solution}
+
+\begin{solution}
+
+Solution 2:
+
+\begin{itemize}
+    \item $\frac{\partial f}{\partial x}(e^{xy}) = e^{xy}y \rightarrow e^{3t^2t^3}t^3$
+    \item $\frac{dx}{dt} = \frac{d}{dt}(3t^2) = 6t$
+    \item $\frac{\partial f}{\partial y} = \frac{\partial }{\parial y}(e^{xy}x) = e^{xy}x \rightarrow e^{3t^2*t^3}3t^2$
+    \item $\frac{dy}{dt} = 3t^2$
+\end{itemize}
+
+
+
+\end{solution}
+
+\end{example}
+
+\section{Gradients and directional derivatives}
+
+\begin{definition}{Gradients in $R^3$}
+
+$f(x,y,z)R^3 \rightarrow R$, then $\vec{v}f = (\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z})$
+
+\end{definition}
+
+\begin{definition}{Gradients in $R^2$}
+
+$\vec{v}f = (\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}$
+
+\end{definition}
+
+\begin{example}
+
+$z = f(x,y) = 9-x^2-y^2$
+
+$\frac{\partial f}{\partial x} = \frac{\ partial }{\partial x}(9-x^2-y^2) = -2x$
+
+$\frac{\partial f}{\partial y}= \frac{\partial }{\partial y}(9-x^2-y^2) = -2y$
+
+$\vec{v} = (-2x,-2y)$
+
+\end{example}
+
+\begin{example}
+
+In what direction from (0,1) does $f(x,y) = x^2-y^2$ increase the fastest?
+
+\begin{solution}
+
+$\vec{v}f = (2x,-2y)$
+
+$\vec{v}f(0,1) = (0,-2)$
+
+f increases fastest in the direcion (0,-2) or $-2j$ or $-j$ or $-100j$
+
+
+\end{solution}
+
+\end{example}
+
+\section{Directional Derivative}
+
+
+\section{Taylor Series}
+
+\subsection{First Order Taylor Formula}
+
+\begin{definition}{First Order aylr Formula $z= f(x,y)$}
+
+$P_1(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b)(x-a)+\frac{\partial f}{\partial y}(a,b)(y-b)$
+
+\end{definition}
+
+\begin{example}
+
+Let $f(x,y) = e^{x+y}$
+
+Find the first order TP for $f$ at 0
+
+\begin{solution}
+
+\begin{itemize}
+    \item $f(0,0) = e^{0+0} = 1$
+    \item $\frac{\partial f}{\partial x} = \frac{\partial}{\partial x} (e^{x+y}) = e^{x+y} \rightarrow \frac{\partial f}{\partial x}(0,0) = e^{0+0} = 1$
+    \item $\frac{\partial f}{\partial y} = e^{x+y} \rightarrow \frac{\partial f}{\partialy}(0,0) = 1$
+\end{itemize}
+
+$P_1(x,,y) = 1 + x + y$
+
+\end{solution}
+
+\end{example}
+
+
+
+\subsection{Second Order Taylor Formula}
+
+$P_2(x,y) = f(a,b) + \frac{\partial f}{\partial x}(a,b)(x-a) _ \frac{\partial f}{\partial y}(a,b)(y-b)+\frac{1}{2}*\frac{\partial^2f}{\partial y^2}(a,b)(y-b)^2 + \frac{\partial^2}{\partial x \partial y}(a,b)(x-a)(y-b)$
+
+
+\begin{example}
+
+Let f(x,y) = $e^{x+y}$
+
+Find the second order TP for f at (0,0)
+
+\begin{solution}
+
+\begin{itemize}
+    \item $\frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}(\frac{\partial f}{\partial x}) = \frac{\partial}{\partial x}) = e^{x+y}, \frac{\partial^2 f}{\partial x^2} = e^{0+0} = 1$
+    \item $\frac{\partial^2 f}{\partial y^2} = \frac{\partial}{\partial y}(\frac{\partial f}{\partial y}) = e^{x+y} \rightarrow \frac{\partial^2 f}{\partial y^2}(0,0) = 1 $
+    \item $\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial x}(\frac{\partial f}{\partial y} = \frac{\partial}{\partial x}(e^{x+y}) = e^{x+y} \rightarrow = 1$
+\end{itemize}
+
+
+P_2(x,y) = 1+1(x-0) + 1(y-0)
+
+\end{solution}
+
+\section{Extrema of Real-Valued function}
+
+\subsection{Critical Points}
+
+\begin{definition}The value C is critical number of f if $f'(C) = 0$ or $f'(c) = DNE$
+
+\end{definition}
+
+\begin{theorem}
+
+Let a function f have a local max/min at x = c, then c is a critical number of x. It does not say "all critical numbers produce local max or min"
+
+\end{theorem}
+
+\begin{example}
+
+$f(x) = x^3$
+
+\begin{solution}
+
+1. CTP?
+
+$f''(x) = 3x^2$
+
+$f''(0) = 0 \rightarrow x = 0$ is CTP
+
+\end{solution}
+
+\end{example}
+
+\begin{theorem}{The 2nd Derivative Test}
+
+Let C be a critical point of f
+
+\begin{itemize}
+    \item If $f''(c) >0$ then f has local at x = c
+    \item If $f''(c) < 0$ then f has local at x = c
+\end{itemize}
+
+\end{theorem}
+
+\end{example}
+
+\section{3.4 Constrained Extrema}
+
+\begin{example}
+
+Suppose a rectangle to be constructed having area 5. What dimensions should the rectangle have so as to Min the amount of the material?
+
+\begin{solution}
+
+Need to minimize
+
+$f(x,y) = 2x+2y$
+
+Subject to the condition that $g(x,y) = xy = 4$
+
+1. We need to rewrite $2x+2y$ using $xy = 4$
+
+$2x+2\frac{4}{x}, x>0$
+
+Then we minimize $f(x) - 2x + \frac{8}{x},x>0$
+
+
+
+
+\end{solution}
+
+
+\end{example}
+
+
+\section{4.4 Divergence and Curl}
+
+\begin{definition}
+
+If $\vec{F} = (F_1,F_2,F_3) = F_1\vec{i}+F_2\vec{j}+F_3\vec{k}$, $\nabla \times \vec{F}$
+
+The divergence of $\vec{F}$ is the scalar
+
+div$\vec{F}$ $\nabla * \vec{F}$ = $\nabla *\vec{F} = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z}$
+
+\end{definition}
+
+
+\begin{example}{$\vec{F} = x^2y\vec{i}+ z\vec{j}+xyz \vec{k}$}
+
+$\nabla \vec{F} = 2xy+0+xy = 3xy$
+
+
+\end{example}
+
+
+\begin{example}{Webassign 4.4 #1}
+
+$\vec{V}(x,y,z) = 2e^{xu}\vec{i}-2e^{xy}\vec{j}+6e^{yz}\vec{k}$
+
+$\vec{V}*\vec{F} = div(\vec{F}$ = $(2e^{xy}y+(-2e^{xy}x)+(6e^{yz}y)$
+
+
+\end{example}
+
+\begin{definition}{Curl of a vector Field}
+
+If $\vec{F} = F_1\vec{i}+F_2\vec{j}+F_3\vec{k}$, the curl of $\vec{F}$ is the vector 
+
+curl $\vec{F}$ = $\nabla \times \vec{F}$ = \[ 
+ \begin{bmatrix}
+    \vec{i} & \vec{j} & \vec{k} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    F_1 & F_2 & F_3 \\
+    
+\end{bmatrix}
+
+\]
+
+And then you find the determinant
+
+\end{definition}
+
+\begin{example}{Webassign 4.4 #3}
+
+$\vec{F}(x,y,z) = 2x\vec{i} + 2y\vec{j}+6z\vec{k}$
+
+$curl(\vec{F})$ = $\nabla \times \vec{F}$ = 
+
+ \begin{bmatrix}
+    \vec{i} & \vec{j} & \vec{k} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    2x & 2y & 6z \\
+    
+\end{bmatrix}
+
+= $0\vec{i} - 0\vec{j}+0\vec{k} = \vec{0}$
+
+
+\end{example}
+
+\section{4.4}
+
+Let $\vec{G} = G_1\vec{i} + G_2\vec{j} + G_3\vec{k}$
+
+$div(\vec{G}) = \vec{v}*\vec{G} = (\frac{\partial G_1}{\partial x}) + (\frac{\partial G_2}{\partial y}) + (\frac{\partial G_3}{\partial Z})$
+
+ \begin{bmatrix}
+    \vec{i} & \vec{j} & \vec{k} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    G_1 & G_2 & G_3 \\
+    
+\end{bmatrix}
+
+\begin{example}
+
+
+
+True/False: $\nabla *(\nabla \times (\nable f)) = 0$, for all functions $f:R^3 \rightarrow R$
+
+
+
+
+\begin{solution}
+
+
+
+\begin{itemize}
+    \item $\nabla f = (\frac{\partial f}{\partial x},(\frac{\partial f}{\partial y},(\frac{\partial f}{\partial z})$
+    \item $\nabla \times (\nabla f)$
+\end{itemize}
+
+$\vec{G}$ = \begin{bmatrix}
+    \vec{i} & \vec{j} & \vec{k} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    \frac{\partial f}{\partial x} & \frac{ \partial f}{\partial y} & \frac{\partial f}{ \partial z} \\
+    
+\end{bmatrix}
+
+$det(\vec{G}) = \vec{0}$
+
+$\nabla * (\nabla \times (\nabla f))  = \nabla *((0,0,0))$
+
+$= (\frac{\partial }{\partial x}0) + (\frac{\partial }{\partial y}0) + \frac{\partial }{\partial z}0) = 0$
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+True/False: If $f(x,y) = cosxsiny$ and $\vec{v}$ is a unit vector in $R^2$ then
+
+$-\frac{\sqrt{2}}{2} \leq D_{\nabla}f(\frac{\pi}{3},\frac{pi}{4})\leq \frac{\sqrt{2}}{2}$
+
+\begin{solution}
+
+$\nabla f(\frac{\pi}{3},\frac{\pi}{4})$ = $(\frac{\sqrt{3}}{2}\frac{\sqrt{2}}{2},\frac{1}{2}\frac{\sqrt{2}}{2})$
+
+$D_{\nabla}f(\frac{\pi}{4},\frac{\pi}{3})=(-\frac{\sqrt{6}}{4},\frac{\sqrt{2}}{4})*\vec{V}....(*)$
+
+Bounds of $(*)$?
+
+We use the dot product formula: $\vec{a}*\vec{b} = ||\vec{a}||*||\vec{b}||cos(\theta)$
+
+$-||\vec{a}||*||\vec{b}|| \leq \vec{a}*\vec{b}\leq ||\vec{a}||\vec{b}||....(**)$
+
+We apply $(**)$ to $(*)$
+
+$-||(-\frac{\sqrt{6}}{4},\frac{\sqrt{2}}{4})||*||\vec{v}|| \leq (-\frac{\sqrt{6}}{4},\frac{\sqrt{2}}{4}) *\vec{v}$ $\leq ||(-\frac{\sqrt{6}}{4},\frac{\sqrt{2}}{4})|| * ||\vec{v}||$
+
+$-\sqrt{(-\frac{\sqrt{6}}{4},\frac{\sqrt{2}}{4})} * 1 \leq P_\vec{v}f(\frac{\pi}{3},\frac{\pi}{4}\leq \sqrt{(-\frac{\sqrt{6}}{4}^2,\frac{\sqrt{2}}{4}}^2)$
+
+True
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+True/False: If $\vec{a}, \vec{u} \epsilon R^n$ and $||\vec{a}|| = 1$]]then $Proj_{\vec{u}}\vec{a} = (\vec{a}*\vec{u})\vec{u}$
+
+where $||\vec{a}|| = 1$
+
+
+
+\end{example}
+
+
+
+\part{Important Examples}
+
+\section{Chapter 1}
+
+\subsection{}
+
+\begin{example}
+
+Complete the computation $(4,5,6)-(6i+5j)$
+
+\begin{solution}{subtract the vectors}
+
+$(4-6,5-5,6-0) = (-2,0,6)$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find the line passing through $(0,4,1)$ in the direction of $4i-k$
+
+\begin{solution}{Add the vectors}
+
+$(0,4,1)+(4t,0,-t) = (4t,4,1-t)$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find the line passing through $(-1,-1,-1)$ in the direction $(6,-1,1)$
+
+\begin{solution}{Subtract on vector by another, and multiply that vector by $t$. Then add that to the vector that it is in the direction of}
+
+$(6,-1,1)-(-1,-1,-1) = (7,0,2)t = (7t,0,2t)$
+
+$(7t,0,2t)+(-1,-1,-1) = (7t-1,-1,2t-1)$
+
+\end{solution}
+
+\end{example}
+
+\section{}
+
+\begin{example}{Homework 1.2 $\#$1}
+
+Calculate $(5i+4j+k) * (i + 2j - k)$
+
+\begin{solution}{Multiply the components of the vectors together and add them}
+
+$(5,4,1)*(1,2,-1) = (5)(1)+(4)(2)+(1)(-1) = 12$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}{Homework 1.2 $\#$2}
+
+Find the angle between $9j+19k$ and $-5i-j$
+
+\begin{solution}{Using the equation $\theta = cos^{-1}(\frac{\vec{a}*\vec{b}}{||\vec{a}||*||\vec{b}||})$}
+
+$\theta  = cos^{-1}(\frac{(0,9,19)*(-5,-1,0)}{\sqrt{9^2+19^2}*\sqrt{5^2+1^2}}) = 94.82^{\circ}$ 
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+Compute $u*v$ where $u = \sqrt{6}-317j+26k$ and $v = \frac{u}{||u||}$
+
+
+\end{example}
+
+
+\begin{example}
+
+Find all values of $x$ such that $(4,x,-10)$ and $(6,x,x)$ are orthogonal.
+
+\begin{solution}{Use the dot product and solve for x}
+
+$(6,x,x)*(4,x,-10) = 24 + x^2-10x = x^2-10x+24$
+
+$(x-6)*(x-4) = 0$
+
+$x = 4, x = 6$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find $b$ and $c$ such that $(5,b,c)$ is orthogonal to both $(1,5,7)$ and $(1,-5,1)$
+
+\begin{solution}{Find the dot product of each and solve the system of equations}
+
+$\vec{a} = (5,b,c),\vec{b} = (1,5,7), \vec{c} = (1,-5,1)$
+
+$\vec{a}*\vec{b} = 5 + 5b + 7c$
+
+$\vec{a} * \vec{c} = 5 - 5b + c$
+
+$10 + 8c = 0$
+
+$c = -\frac{5}{4}$
+
+$b \rightarrow 5 - 5b +\frac{5}{4}$
+
+$-5b+3.75 = 0$
+
+$b = 0.75$
+
+
+
+\end{solution}
+
+\end{example}
+
+
+
+
+
+\end{document}
