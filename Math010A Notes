@@ -1,6 +1,7 @@
 %change section to theorem environments
 %correct references
 %correct overfull hboxes
+%https://github.com/aakashjog credited for the template
 
 \date{}
 \documentclass[fleqn, a4paper, 12pt]{article}
