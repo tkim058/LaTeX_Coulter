@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{fullpage,latexsym,picinpar,amsmath,amsfonts, graphicx}
+
+\begin{document}
+
+\begin{center} 
+
+    \vspace*{6cm}
+    
+    {\LARGE\textbf{Partner: Redacted}}\\[1cm]
+    {\LARGE\textbf{SID: Redacted}}\\[1cm]
+    {\LARGE\textbf{Coulter Mulvihill}}\\[1cm]
+    {\LARGE\textbf{SID: Redacted}}\\[1cm]
+    {\LARGE\textbf{EE 120A Section 22}}\\[1cm]
+    {\LARGE\textbf{Mini Project: Automobile Turn Lights Control}}\\[1cm]
+    
+
+\end{center}
+
+
+\vspace{6cm}
+
+\section{Project Specification}
+
+    \subsection{Purpose}
+        In this project, we were given a high-level state machine that described the behavior of a automobile's six-section turn lights. We then implemented the behavior of the state machine in verilog and were able to successfully model the behavior. We modeled this behavior on the Basys board as well as in waveforms. The purpose of this lab was to implement a design related to a T-Bird's signal light system, that included a right turn signal, a left turn signal, and a hazard signal. We were able to implement these aspects of the system using combinational logic that was applied to a finite state machine, and using LED lights and switches as physical outputs and inputs. 
+    
+\section{System Design and Architecture}
+    
+    \subsection{Light Turn Sequence}
+    
+        \includegraphics{lightsequence.png}
+    
+    \subsection{State Diagrams}
+    
+        \includegraphics{statediagram.png}
+    
+    \subsection{Module}
+    
+        \includegraphics{module1.png}
+        
+        \includegraphics{module2.png}
+        
+        \includegraphics{module3.png}
+        
+        \includegraphics{module4.png}
+        
+        \includegraphics{module5.png}
+
+    \subsection{UCF}
+
+        \includegraphics{ucf.png}
+    
+    \subsection{Waveforms}
+    
+        \subsubsection{Hazard Lights}
+
+            \includegraphics[scale=.5]{hazardwf.png}
+        
+        \subsubsection{Left Signal}
+            
+            \includegraphics[scale=.5]{leftwf.png}
+            
+        \subsubsection{Right Signal}
+            
+            \includegraphics[scale=.5]{rightwf.png}
+            
+        \subsubsection{Idle}
+            
+            \includegraphics[scale=.5]{idlewf.png}
+
+\section{Problems and Technical Issues Encountered}
+    
+    We only encountered a single technical issue in the programming of the Verilog module, testing, and demoing. We modeled our code off of previous labs that we have worked on, and by that, we did not allocate extra bits to the state machine. We allocated a single bit to the state machine, where we needed four. Because of this, the machine was only capable of repeatedly left turning and lacked any other transitions. Debugging this was difficult, as no changes to the logic in the machine led to any change in the test bench or the Basys board. With help, we were able to determine that this was the error, and once fixed, our program worked perfectly.
+    
+\section{Conclusion}
+
+    \subsection{Did the system work?}
+    
+        The system worked as per specifications. We created code for the finite state machine that allowed the inputs switches to determine the LED sequences. We were able to successfully implement a system that initialized turn signals when either the right switch or the left switch was flipped, and if the hazard switch was flipped at any time or the left and right switches were flipped at the same time, it would display hazard lights. We were successfully able to demonstrate this both with our test bench and with the Basys board. The wave forms accurately displayed the desired outputs for the given inputs, as did the Basys board. 
+
+    \subsection{Exceptions(or Special Care)}
+    
+        There was no exceptions to the functionality of the system or special care that was implemented. There was no special care that we took to make our program function - the inputs worked as required in every situation that we utilized in. As far as exceptions, there were none - the switches correlated with the financial state machine's functions perfectly, and the outputs were representative of the functions of the desired inputs. 
+    
+    \subsection{Ways to Improve the System}
+    
+        The system was already very compact and only involved some pieces of logic, so we feel that there aren't many ways to improve the system. One possible way to improve the system would be to allow for the car to change from L3 an R3 directly into hazard lights. As is, the code requires these states to transition to IDLE to perform this particular function, unlike states L1, L2, R1, and R2. The creation of a separate path to that state from each of the states would be necessary, but it would improve the time that it takes to turn on the hazard lights in some situations. 
+        
+\end{document}
