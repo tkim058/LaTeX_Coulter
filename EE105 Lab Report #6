@@ -1,0 +1,177 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{amsmath}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage[table]{xcolor}
+\setlength\parindent{0pt}
+\begin{document}
+
+\begin{center}
+
+\LARGE
+{\textbf{\underline{EE 105 Laboratory Manual 6}}}  \break
+
+\Large
+
+\textbf{3/14/2017}  \break
+
+\textbf{Name: Coulter Mulvihill}  \break
+
+\textbf{SID: Redacted} \break
+
+\textbf{Lab Partner: Redacted} \break
+
+\textbf{Lab 6: Speed Control of a Motor}  \break
+
+\textbf{Lab Section: 023}  \break
+
+
+
+\text
+
+\end{center}
+
+\newpage
+
+
+
+%\section{What is required}
+
+%intro
+
+%prelab
+
+%questions
+
+%input and outputs
+
+%conclusion
+
+\section{Introduction}
+
+In this lab, we will be evaluating the effect that pulse width modulation has on our system. The system which we will be applying pulse width modulation to is the speed control of a motor. In other applications, pulse width modulation can be applied to state machines to change the amount of time of a digital or analog circuit. TO achieve the goals of this lab, we will be modeling the speed control of a motor in simulink. We will then modify the pulse width of the system and evaluate the output that we receive from the circuit. 
+
+\section{Questions}
+
+\subsection{How much is the DC component amplified?}
+
+DC is amplified by 100. 
+
+\subsection{Does the system effectively keep the DC component and essentially remove all other components?}
+
+The system keeps the DC component and essentially removes all other components very well. We determined that the output changes very little during the steady state. 
+
+\subsection{What is the single parameter (R, L, K, J) that determines
+the DC gain?}
+
+K determines the DC gain. 
+
+\subsubsection{If you change the parameter J, will the DC gain or
+decay rate change?}
+
+Since we determined earlier that DC gain is determined by K, J does not impact DC gain.  Since the decay rate is $\frac{R}{2k * \sqrt{\frac{j}{L}}}$, changing J will impact the decay rate. It will make the decay rate larger. 
+
+\subsection{If you wanted to increase the decay rate (i.e., decrease
+the time constant) so that steady state would
+be achieved faster and you did not want to change the
+natural frequency, what is the single parameter that
+you would change?}
+
+Decay Rate:
+
+$\frac{R}{2k * \sqrt{\frac{j}{L}}}$
+
+Natural frequency: 
+
+$\frac{K}{\sqrt{JL}}$ 
+
+The only factor that we can use to change the natural frequency that will not impact the decay rate is R, and the new value of R would be .2 ohms.
+
+To verify our statements, we simulated the system. 
+
+\begin{center} \includegraphics[scale=.3]{20percent} \end{center}
+
+\section{Inputs and Outputs}
+
+\subsection{Part 1}
+
+\subsubsection{Implementation of a flow diagram to simulate the system}
+
+
+\begin{center} \includegraphics[scale=.3]{simulinkmodel.png} \end{center}
+
+
+Simulink Model used to simulate the system
+
+\subsection{Part 2}
+
+\subsubsection{High resolution photo for time constant intervals}
+
+\begin{center} \includegraphics[scale=.3]{worm} \end{center}
+
+Plot that shows the entire system
+
+\subsubsection{Zoomed Oscillations}
+
+\begin{center} \includegraphics[scale=.3]{hellazoom} \end{center}
+
+Minute oscillations - zoomed into the end of the plot past where it had reached steady state to observe the minute oscillations
+
+\subsection{Part 3}
+
+\subsubsection{Pulse width of 10$\%$}
+
+\begin{center} \includegraphics[scale=.3]{10percent} \end{center}
+
+
+\subsubsection{Pulse width of 20$\%$}
+
+\begin{center} \includegraphics[scale=.3]{20percent} \end{center}
+
+\subsubsection{Pulse width of 30$\%$}
+
+\begin{center} \includegraphics[scale=.3]{40percent} \end{center}
+
+\subsubsection{Pulse width of 40$\%$}
+
+\begin{center} \includegraphics[scale=.3]{40percent} \end{center}
+
+\subsubsection{Pulse width of 50$\%$}
+
+\begin{center} \includegraphics[scale=.3]{50percent} \end{center}
+
+\subsubsection{Pulse width of 60$\%$}
+
+\begin{center} \includegraphics[scale=.3]{60percent} \end{center}
+
+\subsubsection{Pulse width of 70$\%$}
+
+\begin{center} \includegraphics[scale=.3]{70percent} \end{center}
+
+\subsubsection{Pulse width of 80$\%$}
+
+\begin{center} \includegraphics[scale=.3]{80percent} \end{center}
+
+\subsubsection{Pulse width of 90$\%$}
+
+\begin{center} \includegraphics[scale=.3]{90percent} \end{center}
+
+\subsubsection{Pulse width of 99$\%$}
+
+\begin{center} \includegraphics[scale=.3]{99percent} \end{center}
+
+\subsubsection{Plot of pulse width vs $\omega$}
+
+\begin{center} \includegraphics[scale=.7]{plotivsw} \end{center}
+
+\section{Conclusion}
+
+In this lab, we simulated the speed control of a motor using simulink and matlab. We found that the angular velocity of the system was the output, and that there is a linear relationship between pulse width and angular velocity. During our evaluation of the zooming in the system, we discovered that once the response had reached steady state, the oscillations were small in size and could only be evaluated by zooming in extensively. We also evaluated how much the DC component was amplified, system stability, the variable controlling gain, and what would happen should we change the parameters involved in the system. This lab strengthened our knowledge of the impact of pulse width modulation on a system. 
+
+
+
+\end{document}
