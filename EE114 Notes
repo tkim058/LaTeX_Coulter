@@ -1,0 +1,2095 @@
+%change section to theorem environments
+%correct references
+%correct overfull hboxes
+
+\date{}
+\documentclass[fleqn, a4paper, 12pt]{article}
+\usepackage{amsmath, amssymb, amsthm, thmtools, amsfonts, commath}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{ulem}
+\usepackage{tikz}
+
+\usepackage{} %inserting graphics
+\graphicspath{ {images/} }
+
+\usepackage{enumerate, enumitem}
+\usepackage{cancel}
+\usepackage{xfrac}
+\usepackage{caption}
+
+\usepackage{float}
+\usepackage{microtype}
+\usepackage{lmodern}
+%\usepackage{background}
+\setcounter{secnumdepth}{4}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\DeclareMathOperator{\vspan}{\mathrm{span}} %declares span operator for matrices
+
+\newenvironment{amatrix}[1]{%declares augmented matrix environment
+	\left(\begin{array}{@{}*{#1}{c}|c@{}}
+	}{%
+\end{array}\right)
+} 
+
+\theoremstyle{definition}
+\newtheorem{example}{Example} %defines example environment
+\newtheorem{definition}{Definition} %defines definition environment
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem} %defines theorem environment
+\newtheorem{corollary}{Corollary}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem{case}{Case}
+
+\newcommand{\suchthat}{\mathrm{\,s.t.\,}}
+
+\newcommand{\R}{\mathrm{R}}
+
+\newcommand{\C}{\mathrm{C}}
+
+\newcommand{\rr}{\mathrm{rr}}
+
+\newcommand{\im}{\mathrm{im}\,}
+
+\newcommand{\distance}{\mathrm{d}}
+
+\newenvironment{solution} %declares solution environment and removes qed at end
+	{\begin{proof}[Solution]\let\qed\relax}
+	{\end{proof}}
+
+\makeatletter
+\@addtoreset{section}{part} %resets section numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{theorem}{part} %resets theorem numbers in new part
+\makeatother
+
+\makeatletter
+\@addtoreset{corollary}{theorem} %resets corollary numbers after a theorem
+\makeatother
+
+\numberwithin{corollary}{theorem}
+
+\numberwithin{equation}{theorem}
+
+\makeatletter %changes spacing between rows of matrices to fit fractions
+\newif\ifcenter@asb@\center@asb@false
+\def\center@arstrutbox{%
+	\setbox\@arstrutbox\hbox{$\vcenter{\box\@arstrutbox}$}%
+}
+\newcommand*{\CenteredArraystretch}[1]{%
+	\ifcenter@asb@\else
+	\pretocmd{\@mkpream}{\center@arstrutbox}{}{}%
+	\center@asb@true
+	\fi
+	\renewcommand{\arraystretch}{#1}%
+}
+\makeatother
+
+\newcommand\blfootnote[1]{%
+	\begingroup
+	\renewcommand\thefootnote{}\footnote{#1}%
+	\addtocounter{footnote}{-1}%
+	\endgroup
+}
+
+\title{Probability, Random Variables and Processes in Electrical Engineering}
+\author{Coulter Muvlihill}
+\date{April 2017}
+
+\begin{document}
+
+\maketitle
+%\setlength{\mathindent}{0pt}
+
+
+
+\tableofcontents
+
+
+
+\newpage
+
+\section{Symbols}
+
+\begin{itemize}
+    \item $\cup$ Union
+    \item $\cap$ Intersection
+    \item $\subset$ Subset
+    \item $A^c$ Complement of A
+    \item $S$ Set
+\end{itemize}
+
+\newpage
+
+\part{Basic Concepts of Probability Theory}
+
+
+
+\section{Set Theory}
+
+\subsection{Sets}
+
+\begin{definition}{Sets}
+
+A set is a collection of things.
+
+\begin{itemize}
+    \item Capital letters are used to denote sets.
+    \item Sets are made up of \textit{elements}
+    \item When using mathematical notation to refer to a set of elements, small letters are used.
+    \item The symbol $\epsilon$ denotes inclusion.
+\end{itemize}
+
+$x \epsilon A$
+
+x is an element of set A
+
+$c \cancel{\epsilon} A$
+
+c is not an element of set A
+
+\end{definition}
+
+\subsection{Set Union}
+
+\begin{definition}{Set Union}
+
+The union of sets \textit{A} and \textit{B} is the set of all elements that are either in \textit{A} or \textit{B}, or in both. 
+
+\begin{itemize}
+    \item Denoted in by $A \cup B$
+    \item $x \epsilon A \cup B$ if and only if $x \epsilon A$ or $x \epsilon B$
+    \item Corresponds to the logical "or" operation
+    \item A $\cup$ B is everything that is in A or in B
+\end{itemize}
+
+
+
+
+
+
+
+\end{definition}
+
+\subsection{Set Intersection}
+
+\begin{definition}{Set Intersection}
+
+The intersection of two sets \textit{A} and \textit{B} is the set of all elements which are contained both in \textit{A} and \textit{B}. 
+
+\begin{itemize}
+    \item Denoted by $A \cap B$
+    \item Another notation is \textit{AB}
+    \item $x \epsilon A \cap B$ if and only if $x \epsilon A$ and $x \epsilon B$
+    \item Corresponds to the logical "and" operation
+    \item A $\cap$ B is everything that is in A and in B
+    \
+\end{itemize}
+
+\end{definition}
+
+\subsection{Set Complement}
+
+\begin{definition}{Set Complement}
+
+The complement of a set \textit{A}, denoted by $A^C$, is the set of all elements S that are not in \textit{A}. 
+
+\begin{itemize}
+    \item The complement of \textit{S} is the null set $\phi$
+    \item $x \epsilon A^C$ if and only if $x \cancel{\epsilon} A$
+    \item Everything not in set $A$ is the set complement of $A$ $A^c$
+\end{itemize}
+
+\end{definition}
+
+\subsection{Set Difference}
+
+\begin{definition}{Set Difference}
+
+The set difference is a combination of intersection and complement.
+
+\begin{itemize}
+    \item The difference between \textit{A} and \textit{B} is a set $A-B$ 
+    \item Contains all elements of A that are not elements of \textit{B}.
+    \item $x \epsilon A - B$ if and only if $x \epsilon A$ and $x \cancel{\epsilon}B$
+    \item $A - B = A \cap B^C$ and $A^C = S-A$
+\end{itemize}
+
+\end{definition}
+
+\subsection{Mutually Exclusive Sets}
+
+\begin{definition}{Mutually Exclusive Sets}
+
+A collection of sets $A_1,...,A_n$ is mutually exclusive if and only if 
+
+$A_i \cap A_j = \phi$, $i \neq j$
+
+\begin{itemize}
+    \item If there are only two sets in the collection, the sets are disjoint
+    \item \textit{A} and \textit{B} are disjoint if and only if $A \cap B = \phi$
+    \item If there is a shared part of the set during the intersection, $A$ and $B$ are \textbf{not} mutually exclusive
+\end{itemize}
+
+
+
+\end{definition}
+
+\subsection{Collectively Exhaustive Sets}
+
+\begin{definition}{Collectively Exhaustive Sets}
+
+A collection of sets $A_1,...,A_n$ is collectively exhaustive if and only if 
+
+$A_1 \cup A_2 \cup ... \cup A_n = S$
+
+If a union of all of the portions of the set make up the entirety of the set, it is collectively exhaustive
+
+\end{definition}
+
+\begin{theorem}{De Morgan's Law}
+
+De Morgan's law relates all three basic operations:
+
+$(A \cup B)^{C} = A^C \cap B^C$
+
+\end{theorem}
+
+\section{Axioms of Probability}
+
+\subsection{Axioms of Probability}
+
+\begin{definition}{Axioms of Probability}
+
+Probability measure $P[*]$ is a function that maps events in the sample space to real numbers such that 
+
+\begin{itemize}
+    \item For any event \textit{A}, $P[A] \geq 0$
+    \item $P[S] = 1$
+    \item For any countable collection $A_1,A_2...$ of mutually exclusive events, $P[A_1\cup A_2\cup ...] = A_1+A_2+...$
+\end{itemize}
+
+\end{definition}
+
+\begin{theorem}
+
+For mutually exclusive sets $A_1$ and $A_2$, $P[A_1 \cup A_2] = P[A_1]+P[A_2]$
+
+\end{theorem}
+
+\begin{theorem}
+
+if $A = A_1 \cup A_2 \cup ... \cup A_n$ and $A_i \cap A_j = \phi$ for $r \neq j$, then $P[A] = \sum_{i - 1}^{m}P[A_i]$
+
+\end{theorem}
+
+\begin{theorem}
+
+The probability of an event $B = \{x_1,x_2...,x_n\}$ is the sum of the probabilities of the outcomes contained in the event $P[B] = \sum_{i = 1}^n P[\{x_i\}]$
+
+\end{theorem}
+
+
+\begin{theorem}
+
+For an experiment with sample space $S = \{x_1,...,x_n\}$ in which each outcome $x_i$ is equally likely, $P[s_i] = \frac{1}{n}$ for $1 \leq i \leq n$.
+
+\end{theorem}
+
+\begin{theorem}
+
+The probability measure $P[*]$ satisfies
+
+\begin{itemize}
+    \item $P[\phi] = 0$
+    \item $P[A^C] = 1 - P[A]$
+    \item For any $A$ and $B$ (not necessarily disjoint), $P[A \cup B] = P[A] + P[B] - P[A \cap B]$
+    \item If $A \subset B$, then $P[A] \leq P[B]$
+\end{itemize}
+
+\end{theorem}
+
+
+
+\section{Conditional Probability}
+
+\subsection{Conditional Probability}
+
+\begin{definition}[Conditional Probability]
+
+The conditional probability of the event A given the occurrence of the event $B$ is 
+
+$P[A|B] = \frac{P[AB]}{P[B]}$
+
+\end{definition}
+
+\begin{theorem}
+
+A conditional probability measure $P[A|B]$ has the following properties that correspond to the axioms of probability.
+
+\begin{itemize}
+    \item $P[A|B] \geq 0$
+    \item $P[B|B] = 1$
+    \item If $A = A_1 \cup A_2 \cup...$ with $A_i \cap A_j = \phi$ for $i \neq j$ then $P[A|B] = P[A_1|B] + P[A_2|B]$
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}{Law of Total Probability}
+
+For an event space $\{B_1,B_2,...B_m\}$ with $P[B_1] > 0$ for all $i_n$, $P[A] = \sum_{i = 1}^n P[A|B_i]P[B_i]$
+
+\end{theorem}
+
+\begin{theorem}{Bayes' Theorem}
+
+$P[B|A] = \frac{P[A|B]P[B]}{P[A]}$
+
+\end{theorem}
+
+\section{Independence}
+
+\subsection{Two Independent Events}
+
+\begin{definition}{Two Independent Events}
+
+Events $A$ and $B$ are independent if and only if $P[AB] = P[A]P[B].$
+
+\end{definition}
+
+\subsection{3 Independent Events}
+
+\begin{definition}{3 Independent Events}
+
+$A_1, A_2$, and $A_3$ are independent if and only if 
+
+\begin{itemize}
+    \item $A_1$ and $A_2$ are independent
+    \item $A_2$ and $A_3$ are independent
+    \item $A_1$ and $A_3$ are independent
+    \item $P[A_1 \cap A_2 \cap A_3] = P[A_1]P[A_2]P[A_3]$
+\end{itemize}
+
+\end{definition}
+
+\subsection{More than Two Independent Events}
+
+\begin{definition}{More than Two Independent Events}
+
+If $n \geq 3$, the sets $A_1,A_2,...,A_n$ are independent if and only if 
+
+\begin{itemize}
+    \item every set of $n-1$ sets taken from $A_1,A_2,...A_n$ is independent
+    \item $P[A_1 \cap A_2 \cap... \cap A_n] = P[A_1]P[A_2]...P[A_n]$
+\end{itemize}
+
+\end{definition}
+
+\subsection{Difference Between Independence and Disjoint}
+
+
+\begin{definition}{Difference between independence and disjoint}
+
+Independence: $P(AB) = P(A)P(B)$
+
+Two independent events may share values 
+
+Joint probability of $AB$ is the probability of $A$ into $B$
+
+Disjoint: $P(AB) = 0$
+
+None of the values equal each other
+
+\end{definition}
+
+
+\section{Examples}
+
+\subsection{Fax Machine}
+
+For the following examples, use the following data. \hfill \break
+
+There are three speeds on a fax machine - medium($m$), low($l$), high($h$). Using the fax machine, you can send either two pages($t$) or 4 pages($f$). You can sends the pages at any combination of speed and size.
+
+\begin{example} Find the sample space of the system.
+
+\begin{solution}
+
+$S = \{lt, lf, mt, mf, ht, hf\}$
+
+
+\end{solution}
+
+\end{example}
+
+\begin{example} Set $A_1$ is the low speed outcomes of the system. Find $A_1$. 
+
+\begin{solution}
+
+$A_1 = \{lt, lf\}$
+
+\end{solution}
+
+\end{example}
+
+\begin{example} Set $A_2$ is the medium speed outcomes of the system. Find $A_2$. 
+
+\begin{solution}
+
+$A_2 = \{mt, mf\}$
+
+\end{solution}
+
+\end{example}
+
+\begin{example} Set $A_3$ is the high speed outcomes of the system. Find $A_3$. 
+
+\begin{solution}
+
+$A_3 = \{ ht, hf\}$
+
+\end{solution}
+
+\end{example}
+
+\begin{example} Set $B_1$ is the 2 page outcomes of the system. Find $B_1$. 
+
+\begin{solution}
+
+$B_3 = \{ lt, mt, ht \}$
+
+\end{solution}
+
+\end{example}
+
+\begin{example} Set $B_2$ is the 4 page outcomes of the system. Find $B_2$. 
+
+\begin{solution}
+
+$B_2 = \{ lf, mf, hf \}$
+
+
+
+\end{solution}
+
+\end{example}
+
+
+
+\begin{example}
+
+Are sets $A_1$ and $B_2$ mutually exclusive?
+
+\begin{solution} $A_1$ and $B_2$ will only be mutually exclusive if $A_2 \cap A_2 = \phi$. This means that the sets of data will share no commonalities.
+
+$A_1 = \{ lt, lf\}$
+
+$B_2 = \{lf, mf, hf \}$
+
+Since $lf$ is in both sets of data, $A_1 \cap B_2 \neq \phi$. The set is \textbf{not} mutually exclusive. 
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Are sets $A_1$ and $A_3$ mutually exclusive?
+
+\begin{solution} $A_1$ and $A_3$ will only be mutually exclusive if $A_1 \cap A_3 = \phi$. This means that the sets of data will share no commonalities.
+
+$A_1 = \{ lt, lf\}$
+
+$A_3 = \{ht, hf \}$
+
+Since no commonalities are shared between the sets, $A_1 \cap A_3 = \phi$. The set \textbf{is} mutually exclusive. 
+
+\end{solution}
+
+\end{example}
+
+
+
+\begin{example}
+
+Are the sets $A_2$ and $A_3$ collectively exhaustive?
+
+\begin{solution} For $A_2$ and $A_3$ to be collectively exhaustive, $A_2 \cup A_3$ must be equal to the entire set $S$. 
+
+$A_2 = \{ mt, mf\}$
+
+$A_3 = \{ ht, hf\}$
+
+$A_2 \cup A_3 = \{mt, mf, ht, hf\}$
+
+$S = \{lt, lf, mt, mf, ht, hf\}$
+
+As we can see, $S \neq A_2 \cup A_3$. Therefore, the sets $A_2$ and $A_3$ are \textbf{not} collectively exhaustive. 
+
+
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+Are the sets $B_1$ and $B_2$ collectively exhaustive?
+
+\begin{solution} For $B_1$ and $B_2$ to be collectively exhaustive, $B_1 \cup B_2$ must be equal to the entire set $S$. 
+
+$B_1 = \{lt, mt, ht \}$
+
+$B_2 = \{lf, mf, hf \}$
+
+$B_1 \cup B_2 = \{lt, lf, mt, mf, ht, hf\}$
+
+$S = \{lt, lf, mt, mf, ht, hf\}$
+
+As we can see, $S = B_1 \cup B_2$. Therefore, the sets $B_1$ and $B_2$ \textbf{are} collectively exhaustive. 
+
+\end{solution}
+
+\end{example}
+
+For the next set of data, use the following probabilities in conjunction with the data provided above. 
+
+$P[lt] = .2, P[lf] = .1, P[mt] = .3, P[mf] = .1, P[ht] = .2, P[hf] = .1$
+
+\begin{example}
+
+What is the probability of a high fax speed?
+
+\begin{solution}
+
+$P[h] = P[hf]+P[ht] = .2+.1 = .3$
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+What is the probability of a low fax speed or a 4 page transmission?
+
+\begin{solution}
+
+$P[l+f] = P[lt] + P[lf] + P[mf] + P[hf] = .2 + .1 + .3 + .1 = .7$
+
+\end{solution}
+
+\end{example}
+
+For the next set of programs, use the following set of data.
+
+A phone call can be a voice call($V$) or a data call (). The call may either be long ($L$) or brief ($B$). $P[V]$ = 0.7, $P[L]$ = 0.6, $P[VL]$ = 0.35.
+
+We can find $P[D]$ = 0.3, $P[B]$ = 0.4, $P[DL]$ = .25
+
+\begin{example} What is $P[DL]$?
+
+\begin{solution}
+
+$P[L] = P[LV]+P[LD]=.6$
+
+$p[LD] = .6-.35$
+
+$P[DL] = 0.25$
+
+\end{solution}
+
+\end{example}
+
+\begin{example} What is $P [D \cup L]$?
+
+\begin{solution}
+
+$P[D+L] = P[D]+P[L] - P[DL]$
+
+$P[D \cup L] = $
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+Find $P[VB]$
+
+\begin{solution}
+
+$P[VB] = $
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find $P[V \cup L]$
+
+\begin{solution}
+
+$P[V \cup L] = $
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Find $P[V \cup D]$
+
+\begin{solution}
+
+$P[V \cup D] = 1$
+
+\end{solution}
+
+\end{example}
+
+
+\begin{example}
+
+Find $P[LB]$
+
+\begin{solution}
+
+$P[LB] = 0$
+
+\end{solution}
+
+\end{example}
+
+
+
+
+
+
+
+\subsection{Resistor Production}
+
+For the following problems, use this set of information to solve them. There are 3 machines - $B_1,B_2,B_3$. $80 \%$ of resistors produced by $B_1$ are within $50 \Omega$ nominal value. $B_2$ produces $90 \%$ within the nominal value. $B_3$ produces $60 \%$ within the nominal value. $B_1$ produces 3000 resistors per hour, $B_2$ produces 4000 resistors per hour, $B_3$ produces 3000 resistors per hour. 
+\begin{example}
+
+What is the probability that the company ships a resistor within $50 \Omega$ of the nominal value?
+
+\begin{solution}
+
+A = probability that resistor is within $50 \Omega$ of the nominal value. 
+
+$P[A|B_1] = 0.8$, $P[A|B_2] = 0.9$, $P[A|B_3] = 0.6$
+
+Production: $ B_1 + B_2 + B_3 = 3000+4000+3000 = 10000$,k so $B_1 = 0.3, B_2 = 0.4, B_3 = 0.3$ if we divide each by 10,000. 
+
+$P[A] = P[A|B_1]P[B_1]+P[A|B_2]P[B_2] + P[A|B_3]P[B_3]$
+
+$ = (0.8)(0.3) + (0.9)(0.4) + (0.6)(0.3) = 0.78$
+
+$78 \%$ will be within $50 \Omega$ of the nominal value
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Given $P[B3] = 0.3, P[A] = 0.78, P[A|B3] = 0.6,$ find the probability that an acceptable resistor comes from machine $B3$. 
+
+\begin{solution}
+
+To find $P[B_3|A]$, use bayes' theorem. 
+
+$P[B_3|A] = \frac{P[A|B_3]P[B_3]}{P[A]}$
+
+$P[B_3|A] = \frac{(0.6)(0.3)}{0.78} = 0.23$
+
+$23 \%$ of the resistors within $50 \Omega$ of the nominal value come from $B_3$
+
+
+\end{solution}
+
+\end{example}
+
+\begin{example}
+
+Consider the following probability model
+
+$P[rr] = 0.01,P[ra] = 0.01, P[ar] = 0.01, P[aa] = 0.97$
+
+\begin{solution}
+
+$P(A) = 0.02$
+
+$P(B) = 0.02$
+
+$P(A|B) = \frac{P(AB)}{B} = \frac{0.01}{0.02} = .5$
+
+\end{solution}
+
+\end{example}
+
+In the experiment with equiprobable outcomes, the event space is $S = \{1,2,3,4\}. P[s] = \frac{1}{4}$ for all $s \epsilon S.$ Are the events $A_1 = \{1,3,4\},A_2 = \{2,3,4\},$ and $A_3 = \phi$ independent? 
+
+\part{Random Variables}
+
+\section{Discrete Random Variables}
+
+\begin{itemize}
+    \item When we choose a discrete random variable, we refer to the observation as a random variable
+    \item In out notation, the name of a random variable is always a capital letter
+    \item The set of possible values of $X$ is the range of $X$
+    \item We denote the range of a random veraiable by the letter $S$ with a subscript which is the name of the random variable
+    \item The $S_X$ is the range of random variable X. $S_Y$ is the range of random variable Y, and so forth.
+\end{itemize}
+
+
+
+\subsection{Random Variable}
+
+\begin{definition}{Random Variable}
+
+A random variable consits of an experiment with a probability measure $P[*]$ defined on a sample space $S$ and a function that assigns a real number oucome in the sample space of the experiment. 
+
+\end{definition}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+    \item On occasion, it is important to identify the random variable $X$ by the function $X(s)$ that maps the sample outcome $s$ to the corresponding value of the random variable $X$.
+    \item As we needed, we will write $\{X=x\}$ to emphasize that there is a set of sample points $s \epsilon S$ for which $X(s) = x$.
+    \item That is, we have adopted the standard notation $\{X = x\} = \{s \epsilon S | X(s) = x\}$
+\end{itemize}
+
+\subsection{Discrete Random Variable}
+
+\begin{definition}{Discrete Random Variable}
+
+$X$ is a discrete random variable if the range of $X$ is a countable set $S_x = \{x_1,x_2,...\}$
+
+\end{definition}
+
+\section{Probability Mass Function}
+
+\begin{definition}{Probability Mass Function(PMF)}
+
+The probability funciton $(PMF)$ of the discrete random variable $X$ is $P_X(x) = P[X=x]$
+
+\end{definition}
+
+\begin{theorem}
+
+For a discrete random variable $x$ with PMF $P_X(x)$ and range $S_X$: 
+
+\begin{itemize}
+    \item For any $x,P_x(x) \geq 0$
+    \item $\sum_{x \epsilon {S_X}}P_X(x) = 1$
+    \item For any event $B \subset S_X$, the probability that $X$ is in the same set $B$ is $P[B] = \sum_{x \epsilon B} P_X(x)$
+\end{itemize}
+
+\end{theorem}
+
+\section{Families of Discrete Random Variables}
+
+
+\begin{itemize}
+    \item In practical applications, certain families of random variables appear over and over again in many experiments
+    \item In each family, the probability mass function of all of the random variables have the same mathematical form.
+    \item They differ only in the values of one of the two parameters
+    \item Depending on the family the PMF formula contains one or two parameters in parentheses
+    \item For example, binomial $(n,p)$ refers in general to the family of binomial random variables
+    \item Binomial $(7,0.1)$ refers to the binomial random variable with parameters $A = 7$ and $p = 0.1$
+\end{itemize}
+
+\begin{definition}{Bernoulli ($p$) of a Random Variable}
+
+$X$ is a Bernoilli ($p$) random variable if the $PMF$ of $X$ has the form $P_X(x) = p(1-p)^{x-1}$ while $x = 1,2,...$ and 0 otherwise where the parameter $p$ is in the range of $0 < p < 1$.
+
+
+\end{definition}
+
+\begin{definition}{Geometric($p$) Random Variable}
+
+$X$ is a geometric ($p$) random variable in the $PMF$ of $X$ has the form $P(1-p)^{x-1}$ while $x = 1,2,...$ and 0 otherwise
+
+\end{definition}
+
+\begin{definition}{Pascal Random Variable}
+
+$X$ is a Pascal $(k,p)$ random variable in the $PMF$ of $X$ has the form 
+
+\[
+    P(x)=\left(
+                \begin{array}{ll}
+                  x-1\\
+                  k-1\\
+                 
+                \end{array}
+              \right)p^k(1-p)^{x-k}
+  \]
+  
+where $0 < p < 1$ and $k$ is an integer such that $k \geq 1$
+
+For a sequence of n independent trials with success probability p, a Pascal random variable is the number of trials u to and including the k-th success.
+
+Geometric(p) = Pascal(1,p)
+
+\end{definition}
+
+\subsection{Summary}
+
+\begin{itemize}
+    \item Bernoulli: Number of success out of one trial
+    \item Binomial: Number of success out of $n$ trials
+    \item Geometric: Number of trials until first success
+    \item Pascal: Number of trials until success $k$
+\end{itemize}
+
+\begin{definition}{Discrete Uniform(k,l) Random Variable}
+
+$X$ is a discrete uniform (k,l) random variable if the $PMF$ of $X$ has the form 
+
+\[
+    P(x)=\left(
+                \begin{array}{ll}
+                  \frac{1}{l-k+1}\text{ while }x = k, k+1, k+2,...\\
+                  0 \text{ otherwise }\\
+                 
+                \end{array}
+              \right)p^k(1-p)^{x-k}
+  \]
+  
+where the parameters $k$ and $l$ are integers such that $k < l$
+
+\end{definition}
+
+\begin{definition}{Poisson($\alpha$) Random Variable}
+
+Poisson ($\alpha$) random variable if the $PMF$ of $X$ has the form
+
+\[
+    P_X(x)=\left(
+                \begin{array}{ll}
+                  \alpha^X e^{-\alpha}/x! \text{ while } x = k, k+1, k+2,...\\
+                  0 \text{ otherwise }\\
+                 
+                \end{array}
+              \right)p^k(1-p)^{x-k}
+  \]
+
+where the parameter $\alpha$ is in the range $\alpha > 0$
+
+\end{definition}
+
+\section{Cumulative Distribution Function}
+
+\begin{definition}
+
+The cumulative distribution function ($CDF$) of random variable $X$ is $F_X(x) = P[X \leq x]$
+
+\end{definition}
+
+\begin{theorem}
+For any discrete random variable $X$ with range $S_x = \{x_1,x_1,...\}$
+
+\begin{itemize}
+    \item $F_x(-\infty) = 0$ and $F_x(\infty) = 1$
+    \item For all $x' \geq x,F_x(x') \geq F_x(x)$
+    \item $x_i \epsilon S_x$ and $\epsilon$, an arbitrarily small positive number $F_x(x_u)-F_x(x_1-\epsilon) = P_x(x_i)$
+    \item $F_x(x) = F_x(x_i)$ for all $x$ such that $x_i \leq x < x_{i+1}$
+\end{itemize}
+
+\end{theorem}
+
+
+\begin{theorem}
+
+For all $b \geq a$, $F_x(b)-F_x(a) = P[a < X \leq B]$
+
+\end{theorem}
+
+
+\part{Continuous Random Variables}
+
+\subsection{Continuous interval}
+
+\begin{itemize}
+    \item $(x_1,x_2)$ is the open interval defined as all numbers between $x_1$ and $x_2$ but not including either $x_1$ or $x_2$. Formally, $(x_1,x_2) = \{x|x_1<x<x_2\}$
+    \item $[x_1,x_2]$ is the closed interval defined as all numbers between $x_1$ and $x_2$ including both $x_1$ and $x_2$. Formally, $[x_1,x_2] = \{x|x_1\leq x\leqx_2\}$
+    \item $[x_1,x_2)$ is the interval defined on all numbers between $x_1$ and $x_2$ including $x_1$ but not including $x_2$. Formally, $[x_1,x_2) = \{x|x_1\leq x < x_2\}$
+    \item $(x_1,x_2]$ is the interval defined as all numbers between $x_1$ and $x_2$ including $x_2$ but not including $x_1$. Formally, $(x_1,x_2 = \{x_1 < x \leq x_2\}$
+\end{itemize}
+
+\subsection{Continuous Random Variables}
+
+\begin{itemize}
+    \item Many experiments lead to random variables with a range that is a continuous interval
+    \item Examples include measuring $T$, the arrival of a particle $(S_T = \{t|0\leq t < \infty \})$; measuring $V$, the voltage across a resistor $(S_v = \{v|- \infty < v < \infty \})$; and measuring the phase angle $A$ of a sinusoidal radio wave $(S_A = \{a|0 \leq a < 2 \pi\})$
+    \item We will call $T$, $V$, and $A$ continuous random variables although we will defer a formal definition until section 3.1. 
+\end{itemize}
+
+\section{Cumulative Distribution Function}
+
+\begin{definition}{CDF}
+
+The cumulative distribution function ($CDF$) of a random variable $X$ is $F_x(x) = P[X \leq x]$
+
+\end{definition}
+
+\begin{theorem}
+
+For nay random variable $X$,
+
+\begin{itemize}
+    \item $F_x(- \infty) = 0$
+    \item $F_x(\infty ) = 1$
+    \item $P[x_1 < X \leq x_2] =F_x(x_2) - F_x(x_1)$
+\end{itemize}
+
+\end{theorem}
+
+\begin{definition}{Continuous Random Variable}
+
+$X$ is a continuous random variable if the $CDF$ $F_x(x)$ is a continuous function
+
+\end{definition}
+
+\section{Probability Density Function}
+
+\begin{definition}{Probability Density Function}
+
+The probability density function ($PDF$) of a continuous random variable $X$ is $f_X(x) = \frac{dF_x(x)}{dx}$
+
+\end{definition}
+
+\begin{theorem}
+
+For a continuous random variable $X$ with ($PDF$) $f_X(x)$
+
+\begin{itemize}
+    \item $f_X(x) \geq 0$ for all $x$\
+    \item $F_X(x) = \int_{- \infty}^x f_X(u)du$
+    \item $\int_{-\inty}^{\infty}f_X(x)dx = 1$
+\end{itemize}
+
+
+\end{theorem}
+
+
+\begin{theorem}
+
+$P[x_1<X\leq x_2] = \int_{x_1}^{x_2}f_x(x)dx$
+
+\end{theorem}
+
+
+\section{Expectation, Averages, and Standard Deviation}
+
+\subsection{Mode}
+
+\begin{definition}{Mode}
+
+A mode of random variable $X$ is a number $x_{mod}$ satisfying $P_X(x_{mod}) \geq P_X(x)$ for all $x$
+
+\end{definition}
+
+\subsection{Median}
+
+\begin{definition}{Median}
+
+A median, $x_{med}$, of random variable $X$ is a number that satisfies $P[X<x_{med}] = P[X > x_{med}]$
+
+\end{definition}
+
+\subsection{Expected Value}
+
+
+\begin{definition}{Expected Value}
+
+The expected value of $X$ is $E[X] = \mu_x = \sum_{x \epsilon S_X} xP_X(x)$
+
+\end{definition}
+
+\begin{theorem}
+
+The Bernoulli($p$) random variable $X$ has expected value $E[X] =p$
+
+\end{theorem}
+
+\begin{theorem}
+
+The Poisson $(\alpha)$ random variable in definition 2.10 has expected value $E[x] = \alpha$
+
+\end{theorem}
+
+\section{Variance and Standard Deviation}
+
+\subsection{Variance}
+
+\begin{definition}{Variance}
+
+The variance of random variable $X$ is $Var[x] = E[(X-\mu_x)^2]$
+
+\end{definition}
+
+\subsection{Standard Deviation}
+
+\begin{definition}{Standard Deviation}
+
+The standard deviation of random variable $X$ is $\sigma_X = \sqrt{Var[x]}$
+
+\end{definition}
+
+\begin{theorem}
+
+$Var[X] = E[X^2]- \mu_X^2 = E[X]^2 - (E[X])^3$
+
+\end{theorem}
+
+\subsection{Moments}
+
+\begin{definition}{Moments}
+
+For a random variable $X$:
+
+\begin{itemize}
+    \item The $n^{th}$ moment is $E[X^n]$
+    \item The $n^{th}$ central moment is $E[(X-\mu_x)^2]$
+\end{itemize}
+
+\end{definition}
+
+\begin{theorem}
+
+$Var[aX+b]=a^2Var[X]$
+
+\end{theorem}
+
+\begin{theorem}
+
+\begin{itemize}
+    \item If $X$ is Bernoulli ($p$), then $Var[X]=p(1-p)$
+    \item If $X$ is geometric $(p)$, then $Var[X] = \frac{1-p}{p^2}$
+    \item If $X$ is binomial $(n,p),$ then $Var[[x] = np(1-p)$
+    \item If $X$ is Pascal $(k,p)$, then $Var[X] = \frac{k(1-p)}{p^2}$
+    \item If $X$ is Poisson($\alpha$), then $Var[X] = \alpha$
+    \item If $X$ is discrete uniform ($k,l)$, then $Var[X] = \frac{(l-k)(l-k+2)}{12}$
+\end{itemize}
+
+\end{theorem}
+
+\section{Expected Values}
+
+\subsection{Expected Values}
+
+\begin{definition}{Expected Value}
+
+The expected value of a continuous random variable $X$ is $E[X] = \int_{-\infty}^{\infty} xf_X(x)dx$
+
+\end{definition}
+
+\begin{example}
+
+
+\[
+    f(x)=\left\{
+                \begin{array}{ll}
+                  1 \; \; \; 0 \leq x < 1\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+  
+Find $E[X]$
+
+\begin{solution}
+
+$E[X] = \int_{-\infty}^{\infty}xf_X(x) = \int_0^1xdx = \frac{1}{2}$
+
+\end{solution}
+
+\end{example}
+
+\begin{theorem}
+
+The expected value of a function, $g(X)$, of a random variable $X$ is $E[g(X)] = \int_{-\infty}^{\infty}f(x)f_X(x)dx$
+
+\end{theorem}
+
+\begin{theorem}
+
+For any random variable X,
+
+\begin{itemize}
+    \item $E[X - \mu x] = 0$ 
+    \item $E[aX+b]=aE[X]+b$
+    \item $Var[X] = E[X^2]-\mu_X^2$
+    \item $Var[aX+b] = a^2Var[X]$
+\end{itemize}
+
+\end{theorem}
+
+
+\section{Families of Continuous Random Variables}
+
+
+\subsection{Uniform Random Variable}
+
+\begin{definition}
+
+X is a uniform (a,b) random variable if the PDF of $X$ is 
+
+\[
+    f(x)=\left\{
+                \begin{array}{ll}
+                  \frac{1}{b-a} \; \; a \leq x < b\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+  
+where the two parameters are $b > a$
+
+
+\end{definition}
+
+\begin{theorem}
+
+If $X$ is a uniform (a,b) random variable,
+
+\begin{itemize}
+    \item The CDF of X is 
+    
+\[
+    f(x)=\left\{
+                \begin{array}{ll}
+                  0 \; \; \; x \leq a\\
+                  \frac{x-a}{b-a} \; \; \; a < x \leq b\\
+                  1 \; \; \; x > b \\
+                \end{array}
+              \right
+  \]
+
+    \item The expected value of $X$ is $E[X] = \frac{b+a}{2}$
+    \item The variance of $X$ is $Var[X] = \frac{(b-1)^2}{12}$
+\end{itemize}
+
+\end{theorem}
+
+\subsection{Exponential Random Variable}
+
+\begin{definition}{Exponential Random Variable}
+
+$X$ is an exponential ($\lambda$) random variable if the PDF of $X$ is 
+
+\[
+    f_X(x)=\left\{
+                \begin{array}{ll}
+                  \lambda e^{-\lambda x} \; \; x \geq 0\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+  
+where the parameter $\lambda >0$
+
+\end{definition}
+
+\begin{theorem}
+
+If $X$ is an exponential ($\lambda$) random variable
+
+\begin{itemize}
+    \item \[
+    F_X(x)=\left\{
+                \begin{array}{ll}
+                  \lambda e^{-\lambda x} \; \; x \geq 0\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+    \item $E[X] = \frac{1}{\lambda}$
+    \item $Var[X] = \frac{1}{\lambda^2}$
+\end{itemize}
+
+\end{theorem}
+
+\begin{example}
+
+The exponential CDF is 
+\[
+    f_T(t)=\left\{
+                \begin{array}{ll}
+                  \lambda 1 - e^{\frac{-t}{3}} \; \; t \geq 0\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+
+Find the PDF, and then $P[2 \leq T \leq 4]$
+
+\begin{solution}
+
+To find the PDF of $T$ we take the derivative of the CDF. 
+
+\[
+    f_T(t)=\frac{dF_T(t)}{dt}=\left\{
+                \begin{array}{ll}
+                  \frac{1}{3}e^{-\frac{t}{4}} \; \; t \geq 0\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+
+Following this, 
+
+$P[2 \leq T \leq 4] = F_4(4)-F_2(2) = e^{-\frac{2}{3}} - e^{-\frac{4}{3}} = 0.250$
+
+\end{solution}
+
+\end{example}
+
+\section{Gaussian Random Variables}
+
+\subsection{Gaussian Random Variables}
+
+\begin{definition}{Gaussian Random Variable}
+
+$X$ is a Gaussian $(\mu,\sigma)$ random variable PDF of $X$ is 
+
+$f_X(x) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-(x-\mu)^2/2\sigma^2}$ 
+
+where the parameter $\mu$ can be any real number and $\sigma > 0$
+
+\end{definition}
+
+\begin{theorem}
+
+If $X$ is a Gaussian $(\mu, \sigma )$ random variable $E[X] = \mu$, $Var[X] = \sigma^2$
+
+\end{theorem}
+
+\begin{theorem}
+
+IF $X$ is a Gaussian $(\mu, \sigma ),Y = aX + b$ is Gaussian $(a \mu + b,a\sigma)$
+
+\end{theorem}
+
+\subsection{Standard Normal Random Variable}
+
+\begin{definition}{Standard Normal Random Variable}
+
+The standard normal random variable $Z$ is the Gaussian (0,1) random variable. 
+
+\end{definition}
+
+\begin{definition}{Standard Normal CDF}
+
+The CDF of the standard normal random variable $Z$  is 
+
+$\phi(z) = \frac{1}{\sqrt{2\pi}}\int_{\infty}^z e^{\frac{-u^2}{2}}du$
+
+\end{definition}
+
+\begin{theorem}
+
+If $X$ is a Guassian $(\mu, \sigma)$ random variable, the CDF of X is 
+
+$F_X(x) = \phi(\frac{x-\mu}{\sigma})$
+
+The probability that $X$ is in the interval $(a,b]$ is
+
+$P[a < X \leq b] = \phi(\frac{b-\mu}{\sigma})-\phi(\frac{a-\mu}{\sigma})$
+
+\end{theorem}
+
+\begin{theorem}
+
+$\phi(-z) = 1 - \phi(z)$
+
+\end{theorem}
+
+\begin{definition}{Standard Normal Complementary CDF}
+
+The standard normal complimentary CDF is 
+
+$Q(z) = P[Z > z] = \frac{1}{\sqrt{2 \pi}}\int_z^{\infty}e^{-\frac{u^2}{2}}du = 1 - \phi(z)$
+
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\part{Functions of Random Variables}
+
+\section{Derived Random Variable}
+
+\subsection{Derived Random Variable}
+
+\begin{definition}{Derived Random Variable}
+
+Each sample $y$ of a derived random variable $Y$ is a mathematical function g(x) of a sample value $x$ of another random variable $X$. We adopt the notation $Y = g(X)$ to describe the relationship of the two random variables. 
+
+\end{definition}
+
+\begin{theorem}
+
+For a discrete random variable $X$, the PMF of $Y = g(X)$ is $P_y(y) = \sum_{x:g(x)=y} P_X(x)$
+
+\end{theorem}
+
+\section{Probability models of Derived Random Variables}
+
+\begin{theorem}
+
+If $Y = ax$, where $a > 0$, then $Y$ has a CDF and PDF $F_Y(y)  = F_X(y/a)$, $f_Y(y) = \frac{1}{a}f_X(\frac{y}{a})$
+
+\end{theorem}
+
+\begin{example}
+
+Let $X$ have a triangular PDF
+
+\[
+    f(x)=\left\{
+                \begin{array}{ll}
+                  2x \; \; 0 \leq x \leq 1\\
+                  0 \; \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+  
+Find the PDF of $Y = aX$. Sketch PDF of $Y$ for $a = \frac{1}{2},1,2$
+
+\begin{solution}
+
+$f_Y(y) = \frac{1}{a}f_X(\frac{y}{a})$
+
+\[
+    f_Y(y)=\left\{
+                \begin{array}{ll}
+                  \frac{2y}{a^2} \; \; 0 \leq y \leq a\\
+                  0 \; \; \text{ otherwise }\\
+                 
+                \end{array}
+              \right
+  \]
+
+\end{solution}
+
+\end{example}
+
+
+
+\begin{theorem}
+
+If $Y = X + b$, $F_Y(y)=F_X(y-b)$, $f_Y(y) = f_X(y-b)$
+
+\end{theorem}
+
+\begin{theorem}
+
+Let $U$ be a uniform (0,1) random variable and let $F(x)$ denote a cumulative distribution function with an inverse $F^{-1}(u)$ defined for $0 < u < 1.$ The random variable $X = F^{-1}(U)$ has CDF $F_X(x)=F(x).$
+
+\end{theorem}
+
+\begin{example}
+
+$U$ is the uniform (0,1) random variable and $X = g(U).$ Derive $g(U)$ such that X is the exponential (1) random variable. 
+
+\begin{solution}
+
+The CDF of $X$ is simply
+
+\[
+    F_X(x)=\left\{
+                \begin{array}{ll}
+                  0 \; \; \; \; \; \; \; \; \; \; \; \; \;  x < 0\\
+                  1 - e^{-x} \; \; \; x \geq 0\\
+                 
+                \end{array}
+              \right
+  \]
+  
+Note that if $u = F_X(x) = 1-e^{-x}$, then $x = -ln(1-u)$. That is, for any $u\geq 0$, $F_X^{-1}(u) = -ln(1-u)$. Thus, $X = g(U) = -ln(1-u)$ is an exponential random variable with parameter $\lambda = 1$.
+
+\end{solution}
+
+\end{example}
+
+\part{Multiple Random Variables}
+
+\section{Two Discrete Random Variables}
+
+\subsection{Joint Cumulative Distribution Function}
+
+\begin{definition}{Joint Cumulative Distribution Function (CDF)}
+
+The joint cumulative distribution function of random variables X and Y is $F_{X,Y}(x,y) = P[X \leq x, Y \leq y]$
+
+\end{definition}
+
+\begin{theorem}
+
+For any pair of random variables, X,Y,
+
+\begin{itemize}
+    \item $0 \leq F_{X,Y}(x,y) \leq 1$
+    \item $F_X(x) = F_{X,Y}(x,\infty)$
+    \item $F_Y(y) = F_{X,Y}(\infty, y)$
+    \item $F_{X,Y}(\infty,y) = F_{X,Y}(x,-\infty) = 0$
+    \item If $x \leq x_1$ and $y \leq y_1$, then $F_{X,Y}(x,y) \leq F_{X,Y}(x_1,y_1)$
+    \item $F_{X,Y}(\infty,\infty) = 1$
+\end{itemize}
+
+\end{theorem}
+
+\subsection{Joint Probability Mass Function}
+
+\begin{definition}{Joint Probability Mass Function (PMF)}
+
+THe joint probability mass function of discrete random variables $X$ and $Y$ is $P_{X,Y}(x,y) = P[X = x,Y=y]$
+
+\end{definition}
+
+\begin{theorem}
+
+For discrete random variables $X$ and $Y$ and any set $B$ in the $X,Y$ plane, the probability of the event $\{(X,Y) \epsilon B\} $ is 
+
+$P[B] = \sum_{(x,y) \epsilon B} P_{X,Y}(x,y)$
+
+\end{theorem}
+
+\subsection{Marginal PMF}
+
+\begin{theorem}
+
+For discrete random variables $X$ and $Y$ with joint PMF $P_{X,Y}(x,y)$
+
+$P_X(x) = \sum_{y \epsilon S_Y} P_{X,Y}(x,y),P_Y(y) = \sum_{y \epsilon S_X} P_{X,Y}(x,y)$
+
+
+\end{theorem}
+
+\begin{example}
+
+Joint PMF of X and Y
+
+\begin{tabular}{ l | c r x}
+  P_{X,Y}(x,y) & y = 0 & y = 1 & y = 2\\ \hline
+  x=0 & 0.01 & 0 & 0\\
+  x=1 & 0.09 & 0.09 & 0\\
+  x=2 & 0 & 0 & 0.81\\
+\end{tabular}
+
+Find the marginal PMFs for the random variables $X$ and $Y$
+
+
+\begin{solution}
+
+Both X and Y have range $\{0,1,2\}$
+
+$P_X(0) = \sum_{y = 0}^2 P_{X,Y} (0,y) = 0.01$
+
+$P_X(1) = \sum_{y = 0}^2 P_{X,Y} (1,y) = 0.18$
+
+$P_X(2) = \sum_{y = 0}^2 P_{X,Y} (2,y) = 0.81$
+
+$P_X(x) = 0 \; \; x \neq 0, 1, 2$
+
+$P_Y(0) = \sum_{x = 0}^2 P_{X,Y} (x,0) = 0.10$
+
+$P_Y(1) = \sum_{x = 0}^2 P_{X,Y} (x,1) = 0.09$
+
+$P_Y(2) = \sum_{x = 0}^2 P_{X,Y} (x,2) = 0.81$
+
+$P_Y(y) = 0 \; \; y \neq 0, 1, 2$
+
+
+\begin{tabular}{ l | c r x | y}
+  P_{X,Y}(x,y) & y = 0 & y = 1 & y = 2 & P_X(x)\\ \hline
+  x=0 & 0.01 & 0 & 0 & 0.02\\
+  x=1 & 0.09 & 0.09 & 0 & 0.18\\
+  x=2 & 0 & 0 & 0.81 & 0.81\\ \hline
+  P_Y(y) & 0.10 & 0.09 & 0.81 & \\
+\end{tabular}
+
+\end{solution}
+
+\subsection{Joint Probability Density Function}
+
+\begin{definition}{Joint Probability Densidty Function}
+
+The joint PDF of the continuous random variables $X$ and $Y$ is a function $f_{X,Y}(x,y)$ with the property
+
+$F_{X,Y} = \int_{-\infty}^x \int_{-\infty}^y f_{X,Y}(u,v)dvdu$
+
+
+\end{definition}
+
+
+\begin{theorem}
+
+$P[x_1 < X \leq x_2,y_1 < Y \leq y_2] = F_{X,Y}(x_2,y_2)-F_{X,Y}(x_2,y_1) - F_{X,Y}(x_1,y_2)+F_{X,Y}(x_1,y_1)$
+
+\end{theorem}
+
+\begin{theorem}
+
+A joint PDF $f_{X,Y}(x,y)$ has the following properties corresponding to first and second axioms of probability
+
+\begin{itemize}
+    \item $f_{X,Y}(x,y) \geq 0$ for all $(x,y)$
+    \item $\int_{-\infty}^\infty \int_{-\infty}^\infty f_{X,Y}(x,y)dxdy = 1$
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}
+
+The probability that the continuous random variables $(X,Y)$ are in $A$ is
+
+$P[A] = \int \int_A f_{X,Y}(x,y)dxdy$
+
+\end{theorem}
+
+\subsection{Marginal PDF}
+
+\begin{theorem}
+
+If $X$ and $Y$ are are random variables with joint PDF $f_{X,Y}(x,y)$,
+
+$f_X(x) = \int_{-\infty}^\infty f_{X,Y}(x,y)dy, \; f_Y(y) = \int_{-\infty}^\infty f_{X,Y}(x,y)dx$
+
+\end{theorem}
+
+\begin{theorem}
+
+From the definition of the joint PDF, we can write
+
+$F_X(x) = P[X \leq x] = \int_{-\infty}^x(\int_{-\infty}^\infty f_{X,Y}(u,y)dy)du$
+
+Taking the derivative of both sides with respect to x(which involves differentiating an integral with variable limits), we obtain $f_X(x) = \int_{-\infty}^\inftyf_{X,Y}(x,y)dy$. A similar argument holds for $f_Y(y)$. 
+
+\end{theorem}
+
+
+
+\subsection{Functions of Two Random Variables}
+
+\begin{theorem}
+
+For discrete random variables $X$ and $Y$, the derived random variable $W = g(X,Y)$ has PMF
+
+$P_W(w) = \sum_{(x,y):g(x,y)=w} P_{X,Y}(x,y)$
+
+\end{theorem}
+
+\begin{theorem}
+
+For continuous random variables $X$ and $Y$, the CDF of $W = g(X,Y)$ is 
+
+$F_W(w) = P[W \leq w] = \int \int_{g(x,y) \leq w}f_{X,Y}(x,y)dxdy$
+
+\end{theorem}
+
+\subsection{Expectations, Covariance, and Correlation}
+
+\begin{theorem}
+
+
+For random variables $X$ and $Y$, the expected value of $W = g(X,Y)$ is 
+
+\begin{itemize}
+    \item Discrete: $E[W] = \sum_{x \epsilon S_X} \sum_{x \epsilon S_Y} g(x,y)P_{X,Y}(x,y)$
+    \item Continuous: $E[W] = \int_{-\infty}^\infty \int_{-\infty}^\infty g(x,y)F_{X,Y}(x,y)dxdy$
+\end{itemize}
+
+\end{theorem}
+
+\begin{theorem}
+
+For any two random variables $X$ and $Y$,
+
+$E[X+Y] = E[X] + E[Y]$
+
+\end{theorem}
+
+\begin{theorem}
+
+The variance of the sum of two random variables is
+
+$Var[X+Y] = Var[X] + Var[Y] + 2E[(X - \mu_x)(Y-\mu_y)]$
+
+\end{theorem}
+
+\begin{definition}{Covariance}
+
+The covariance of two random variables $X$ and $Y$ is 
+
+$Cov[X,Y] = E[(X - \mu_x)(Y-\mu_y)]$
+
+\end{definition}
+
+\begin{definition}{Correlation}
+
+The corellation of $X$ and $Y$ is $r_{X,Y} = E[XY]$
+
+\end{definition}
+
+
+\begin{theorem}
+
+\begin{itemize}
+    \item $Cov[X,Y] = r_{X,Y}-\mu_x \mu_y$
+    \item $Var[X+Y] = Var[X] + Var[Y] + 2Cov[X,Y]$
+    \item If $X = Y$, $Cov[X,Y] = Var[X] = Var[Y]$ and $r_{x,y} = E[X^2] = E[Y^2]$
+\end{itemize}
+
+\end{theorem}
+
+\subsection{Orthogonal Random Variables}
+
+\begin{definition}{Orthogonal Random Variables}
+
+Orthogonal random variables $X$ and $Y$ are orthogonal if $r_{x,y} = 0$
+
+\end{definition}
+
+\begin{definition}{Uncorrelated Random Variables}
+
+Random Variables $X$ and $Y$ are uncorrelated if $Cov[X,Y] = 0$
+
+\end{definition}
+
+\begin{definition}{Correlation Coefficient}
+
+The correlation coefficient of two random variables $X$ and $Y$ is 
+
+$\rho_{X,Y} = \frac{Cov[X,Y]}{\sqrt{Var[X]Var[Y]}} = \frac{Cov[X,y]}{\sigma_x\sigma_y}$
+
+\end{definition}
+
+\begin{theorem}
+
+$-1\leq \rho_{X,Y} \leq 1$
+
+\end{theorem}
+
+\section{Conditioning and Independence}
+
+\subsection{Conditional PDF}
+
+\begin{theorem}
+
+$X$ and $Y$ are discrete random variables. FOr any any $y \epsilon S_y$ the conditional expected value of $g(X,Y)$ given $Y = y$ is 
+
+$E[g(X,Y)|Y = y] = \sum_{x \epsilon S_X} g(x,y)P_{X|Y}(x|y)$
+
+\end{theorem}\
+
+\begin{definition}[Conditional PDF]
+
+For $y$ such that $f_Y(y) > 0$, the conditional PDF of $X$ given ${Y = y}$ is 
+
+$f_{X|Y}(x|y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}$
+
+\end{definition}
+
+
+\subsection{Conditional Expected Value}
+
+\begin{definition}
+
+The conditional expected value $E[X|Y]$ is a function of a random variabl $Y$ such that if $Y = y$ then $E[X|Y] = E[X|Y=y]$
+
+\end{definition}
+
+\subsection{Iterated Expectation Property}
+
+
+\begin{theorem}{Iterated Expectation}
+
+$E[E[X|Y]] = E[X]$
+
+\end{theorem}
+
+\begin{theorem}
+
+$E[E[g(X),Y]] = E[g(X)]$
+
+\end{theorem}
+
+\section{Independent Random Variables}
+
+\begin{definition}{Independent Random Variables}
+
+Random Variables $X$ and $Y$ are independent if and only if 
+
+Discrete: $P_{X,Y}(x,y) = P_X(x)P_Y(y)$
+
+Continuous: $f_{X,Y}(x,y) = f_X(x)f_Y(y)$
+
+\end{definition}
+
+\section{Bivariate Gaussian Random Variables}
+
+\subsection{Bivariate Gaussian Random Variables}
+
+\begin{definition}{Bivarite Gaussian Random Variables}
+
+Random Variables $X$ and $Y$ have a bivariate Gaussian PDF with parameters $\mu_1,\sigma_1,\mu_2,\sigma_2,$ and $\rho$ if
+
+\end{definition}
+
+
+\begin{theorem}
+
+If $X$ and $Y$ are bivariate Gaussian random variables in the previous definition, $X$ is the Gaussian $(\mu_1,\sigma_1)$ random variable and $Y$ is the Gaussian $(\mu_2,\sigma_2)$ random variable:
+
+$f_X(x) = \frac{1}{\sigma_1 \sqrt{2\pi}}e^{-(x-\mu_1)^2\sigma_1^2} \; \; \; f_Y(y) = \frac{1}{\sigma_2 \sqrt{2\pi}}e^{-(y-\mu_2)^2\sigma_2^2}$
+
+\end{theorem}
+
+
+
+\begin{theorem}
+
+Bivariate Gaussian random variables $X$ and $Y$ have correllation coefficient $\rho_{X,Y} = \rho$
+
+\end{theorem}
+
+\begin{theorem}
+
+Bivariate random variables $X$ and $Y$ are uncorrelated if and only if they are independent.
+
+\end{theorem}
+
+\section{Random Vectors}
+
+\subsection{Expected Value Vector}
+
+\begin{definition}{Expected Value Vector}
+
+The expected value vector of a random vector $X$ is a column vector 
+
+$E[X] = \mu_X = [E[X_1] \; E[X_2] \; ... E[X_n]]'$
+
+\end{definition}
+
+\subsection{Vector Correlation}
+
+\begin{definition}{Vector Correlation}
+
+The correlation of a random vector $X$ is an $n \times n$ matrix $R_X$ with $i,\; j$th element $R_x(i,j) = E[X_iX_j]$. In vector notation,
+
+$R_X = E[XX']$
+
+\end{definition}
+
+\subsection{Vector Covariance}
+
+\begin{definition}{Vector Covariance}
+
+The covariance of a random vecotr $X$ is an $x \times n$ matrix $C_X$ with components $C_X(i,j) = Cov[X_i,X_j]$. In vector notation
+
+$C_X = E[(X-\mu_x)(X-\mu_X)']$
+
+\end{definition}
+
+
+\begin{theorem}
+
+For a random vector $X$ with correlation matrix $R_X$, covariance matrix $C_x$, and vector expected value $\mu_x$,
+
+$C_X = R_X-\mu_X \mu_x'$
+
+\end{theorem}
+
+\part{Sums of Random Variables}
+
+\section{Moment Generating Functions}
+
+\begin{definition}{Moment Generating Function(MGF)}
+
+For a random variable $X$, the moment generating function (MGF) of $X$ is $\phi_X(s) = E[e^{sX}]$
+
+\end{definition}
+
+\begin{theorem}
+
+A random variable X with MGF $\phi_X(s)$ has nth moment
+
+$E[X^n] = \frac{d^n\phi_X(s)}{ds^n}|_{s=0}$
+
+\end{theorem}
+
+\begin{theorem}
+
+When $X$ and $Y$ are independent random variables, the PDF of W = X+Y is 
+
+$f_W(w) = \sum_{-\infty}^\infty f_x(w-y)f_y(y)dy = \int_{-\infty}^\infty f_X(x)f_Y(w-x)dx$
+
+\end{theorem}
+
+\begin{theorem}
+
+The sum of n independent Gaussian random variables $W = X_1+...+X_n$ is a Gaussian random variable
+
+\end{theorem}
+
+
+\section{Central Limit Theorem}
+
+\begin{theorem}{Central Limit Theorem}
+
+Given $X_1,X_2,...$ a sequence of iid random variables with expected value $\mu_x$ and variance $\sigma_x^2$, the CDF of $Z_n = (\sum_{i = 1}^nX_i-n\mu_x)/\sqrt{n\sigma_x^2}$ has the property 
+
+$lim_{n\rightarrow \infty} F_{Z_n}(z) = \phi(z)$
+
+\end{theorem}
+
+\part{Stochastic Processes}
+
+\section{Stochastic Process}
+
+\begin{definition}{Stochastic Process}
+
+A stochastic process $X[t]$ consists of an experiment with a probability measure $P[]$ defined on a sample space $S$ and a function that assigns a time function $x(t,s)$ to each outcome $s$ in the sample space of the experiment. 
+
+\end{definition}
+
+\begin{definition}{Sample Function}
+
+A sample function $x(t,s)$ is the time function associated with outcome $s$ of an experiment
+
+\end{definition}
+
+
+\begin{definition}{Ensemble}
+
+The ensemble of a stochastic process is the set of all possible time functions that can result from an experiment
+
+\end{definition}
+
+\section{Types of Stochastic Processes}
+
+\begin{definition}{Random Sequence}
+
+A random sequence $X_n$ is an ordered sequence of random variables
+
+$X_0,X_1,...$
+
+\end{definition}
+
+\section{Random Variables From Random Processes}
+
+\begin{itemize}
+    \item Suppose we observe a stochastic process at a particular time instant $t_1$
+    \item In this case, each time we perform the experiment, we observe a sample function $x(t,s)$ and that sample function specifies the value of $x(t_1,s)$
+    \item Each time we perform the experiment, we have a new $s$ and we observe a new $x(t_1,s)$
+    \item Therefore, each $x(t_1,s)$ is a sample value of a random variable
+    \item We use the notation $X(t_1)$ for this random variable
+    \item Like any other random variable, it has either a PDF $f_{x_{(t_1)}}(x)$ or a PMF $P_X_{(t_1)}(x)$
+    \item Note that the notation X(t) can refer to either the random process or the random variable that corresponds to the value of the random process at time t
+\end{itemize}
+
+
+\section{Independent, Identically Distributed Random Sequences}
+
+\begin{theorem}
+
+Let $X_n$ denote an idd random sequence. For a discrete-value process, the sample vector $X = [X_{n_{1}} ... X_{n_{k}}]'$ has joint PMF
+
+$P_X(x) = P_X(x_1)P_X(x_2)...P_X(x_k) = \prod_{i = 1}^k P_X(x_i)$
+
+FOr a continuous-value process, the joint PDF of $X = [X_{n_{1}},...,X_{n_{k}}]'$ is 
+
+$f_X(x) = f_X(x_1)f_X(x_2)...f_X(x_k) = \prod_{i=1}^k f_X(x_i)$
+
+\end{theorem}
+
+
+\begin{definition}{Bernoulli Process}
+
+A Bernoulli($\rho$) process $X_n$ is an iid random sequence in which $X_n$ is a Bernoulli $(\rho)$ random variable
+
+\end{definition}
+
+\section{Expected Value and Correlation}
+
+\begin{definition}{The Expected Value of a Process}
+
+The expected value of a stochastic process $X(t)$ is the deterministic function 
+
+$\mu_x = E[X(t)]$
+
+\end{definition}
+
+\begin{definition}{Autocovariance}
+
+The autocovariance function of the stochastic process X(t) is 
+
+$C_X(t,\tau) = Cov[X(t),X(t+\tau)$
+
+The autocovariance function of the random sequence $X_n$ is
+
+$C_X[m,k] = Cov[X_m,X_{m+k}]$
+
+\end{definition}
+
+\begin{definition}{Autocorrelation Function}
+
+The autocorrelation function of a stochastic process X(t) is 
+
+$R_X(t,\tau) = E[X(t)X(t+\tau)]$
+
+The autocorrealtion function of the random sequence $X_n$ is 
+
+$R_X[m,k] = E[X_mX_{m+k}]$
+
+\end{definition}
+
+
+\begin{theorem}
+
+The autocorrelation and autocovariance functions of a process X(t) satisfy
+
+$C_X(t,\tau) = R_X(t,\tau)- \mu_X(t)\mu_X(t+\tau)$
+
+The autocorrelation and autocovariance functions of a random sequence $X_n$ satisfy
+
+$C_X[n,k] = R_X[n,k]-\mu_X(n)\mu_X(n+k)$
+
+\end{theorem}
+
+\section{Stationary Process}
+
+\begin{definition}
+
+A stochastic process $X(t)$ is stationary if and only if for all sets of time instants $t_1,...,t_m$, and any time difference $\tau$
+
+$f_{X_{(t_1)}},...X(t_m) = f_{X_{t_1+\tau}},...,_{X_{t_m+\tau}}(x,_1,...x_m)$
+
+A random sequence $X_n$ is stationary if and only if for any set of integer time instants $n_1,...,n_m$, and integer time difference $k$,
+
+$f_{X_{t_1}},..._{X_{t_1m}}(x_1,...x_m) = f_{X_{n_1+k}},...,_{X_{n_m+k}}(x_1,...x_m)$
+
+\end{definition}
+
+\section{Wide Sense Stationary Stochastic Processes}
+
+\begin{definition}{Wide sense stationary}
+
+$X(t)$ is a wide sense stationary stochastic process if and only if for all t, 
+
+$E[X(t)] = \mu_x,$ and $R_X(t,\tau) = R_X(0,\tau) = R_X(\tau)$
+
+$X_n$ is a wide sense stationary random sequence if and only if for all n, 
+
+$E[X_n] = \mu_x,$ and $R_x[n,k] = R_X[0,k] = R_X[k]$
+
+\end{definition}
+
+\begin{theorem}
+
+For a wide sense stationary process X(t), the autocorrelation function $R_X(\tau)$ has the following properties: 
+
+$R_X(0) \geq 0, R_X(\tau) = R_X(-\tau), R_X(0) \geq |R_X(\tau)|$
+
+If $X_n$ is a wide sense stationary random sequence: 
+
+$R_X[0] \geq 0,R_X[k] = R_X[-k], R_X[0] \geq |R_X[k]|$
+
+\end{theorem}
+
+\begin{definition}{Average Power}
+
+The average power of a wide sense stationary process $X(t)$ is $R_X(0) = E[X^2(t)$
+
+The average power of a wide sense stationary sequence $X_n$ is $R_X(0) = E[X^2_n]$
+
+\end{definition}
+
+\section{Cross-Correlation}
+
+\begin{definition}{The Cross Correlation Function}
+
+The cross-correlation of continuous-time random processes $X(t)$ and $Y(t)$ is 
+
+$R_X(t,\tau) = E[X(t)Y(t+\tau)]$
+
+The cross-correlation of random sequences $X_n$ and $Y_n$ is $R_{XY}[m,k]=E[X_m,Y_m+k]$
+
+\end{definition}
+
+\section{Gaussian Processes}
+
+\begin{definition}{Guassian Process}
+
+$X(t)$ is a Gaussian Stochastic Process if and only if $X = [X(t_1)...X(t_k)]'$ is a Gaussian random vector for any integer $k > 0$ and any set of time instants $t_1,t_2,...,t_k$
+
+$X_N$ is a Gaussian random sequence if and only if $X = [X_{N_1} ... X_{N_k}\'$ is a Gaussian random vector for any integer $k > 0$ and any set of time instants $n_1,n_2,...,n_k$
+
+\end{definition}
+
+
+
+\end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
