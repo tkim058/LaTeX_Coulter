@@ -1,0 +1,242 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{amsmath}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage[table]{xcolor}
+\setlength\parindent{0pt}
+\begin{document}
+
+\begin{center}
+
+\LARGE
+{\textbf{\underline{EECS 168 Laboratory Report 2}}}  \break
+
+\Large
+
+
+
+\textbf{Name: Coulter Mulvihill}  \break
+
+\textbf{Section 023} \break
+
+
+\text
+
+\end{center}
+
+\newpage
+
+\section{Summary}
+
+$\; \; \;$ In this lab I learned how to create, test, and simulate layouts for inverters and nand gates and inverters. I started with learning how to work with inverters and layouts. I created a layout that fit the parameters and experimented with error correction. Following this I created a schematic of a NAND gate. I simulated the outputs of the schematic. After that, I created a layout for the NAND gate and worked with that as well. I learned a lot about basic layouts.
+
+\section{Inverter Layout}
+
+\subsection{Inverter Layout}
+
+\begin{center}
+
+\includegraphics[scale = .45]{layout}
+
+\end{center}
+
+\subsection{Clean DRC}
+
+\begin{center}
+
+\includegraphics[scale = .45]{invdrc}
+
+\end{center}
+
+
+\subsection{Clean LVS}
+
+\begin{center}
+
+\includegraphics[scale = .45]{invlcvs}
+
+\end{center}
+
+
+\section{NAND Gate Schematic}
+
+\subsection{Schematic of NAND Gate}
+
+\begin{center}
+
+\includegraphics[scale = .45]{001NandSchem}
+
+\end{center}
+
+
+\subsection{Block version of NAND Gate}
+
+\begin{center}
+
+\includegraphics[scale = .45]{002Block}
+
+\end{center}
+
+
+\subsection{NAND Gate Testbench}
+
+\begin{center}
+
+\includegraphics[scale = .45]{003Testbench}
+
+\end{center}
+
+
+\subsection{Netlisting}
+
+\begin{center}
+
+\includegraphics[scale = .45]{01Netlist}
+
+\end{center}
+
+
+\subsection{SAE}
+
+\begin{center}
+
+\includegraphics[scale = .45]{02SAE}
+
+\end{center}
+
+\subsection{DC Voltage}
+
+\begin{center}
+
+\includegraphics[scale = .45]{1DCV1}
+
+\end{center}
+
+\subsection{Transient Analysis}
+
+\begin{center}
+
+\includegraphics[scale = .45]{2TRANV1}
+
+\end{center}
+
+\subsection{Delay}
+
+\begin{center}
+
+\includegraphics[scale = .45]{3DelayTran}
+
+\end{center}
+
+\subsection{Rise and Fall}
+
+\begin{center}
+
+\includegraphics[scale = .45]{4RiseFall}
+
+\end{center}
+
+\subsection{Average Voltage}
+
+\begin{center}
+
+\includegraphics[scale = .45]{5AVE}
+
+\end{center}
+
+\subsubsection{Frequency}
+
+\begin{center}
+
+\includegraphics[scale = .45]{6FREQ}
+
+\end{center}
+
+\section{NAND Gate Layout}
+
+\subsection{NAND Gate Layout}
+
+\begin{center}
+
+\includegraphics[scale = .8]{cleannand}
+
+\end{center}
+
+\subsection{NAND DRC}
+
+\begin{center}
+
+\includegraphics[scale = .45]{cleandrc}
+
+\end{center}
+
+\subsection{NAND LCS}
+
+\begin{center}
+
+\includegraphics[scale = .45]{cleanlvs}
+
+\end{center}
+
+\section{Problems Encountered}
+
+I did not encounter any problems completing this lab. Any errors were corrected using custom designer and the help of the TA. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
