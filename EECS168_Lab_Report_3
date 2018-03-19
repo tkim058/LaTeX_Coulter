@@ -1,0 +1,347 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{amsmath}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage[table]{xcolor}
+\setlength\parindent{0pt}
+\begin{document}
+
+\begin{center}
+
+\LARGE
+{\textbf{\underline{EECS 168 Laboratory Report 3}}}  \break
+
+\Large
+
+
+\textbf{Name: Coulter Mulvihill}  \break
+
+
+
+
+\text
+
+\end{center}
+
+\newpage
+
+\part{Summary}
+
+In this lab, we created several different CMOS circuits, layouts, and test benches. We started the lab by evaluating a subject covered in previous labs - an inverter. We used our inverter layout and schematic LVS results to perform LPE and to analyze our inverter with parasitics as opposed to just the layout. Following this, we created a one bit full adder using the design hierarchy rules - we started with schematic, test bench, then layout. Following creating these, we evaluated DRC, LVS, LPE, and post layout simulation. After completing each of these steps for the one bit full adder, we did the same for the four bit full adder. 
+
+\newpage
+
+
+
+\part{Inverter Parasitics and Post Layout Simulation}
+
+\section{Inverter Parasitics/LPE}
+
+\begin{center}
+
+\includegraphics[scale=.45]{invlpe}
+
+\end{center}
+
+\section{Inverter Post Transient Analysis}
+
+\begin{center}
+
+\includegraphics[scale=.45]{invtran2}
+
+\end{center}
+
+
+
+\newpage
+
+\part{Ring Oscillator}
+
+\section{Ring Oscillator Schematic}
+
+\begin{center}
+
+\includegraphics[scale=.45]{roscschem}
+
+\end{center}
+
+
+\section{Ring Oscillator Test Bench}
+
+\begin{center}
+
+\includegraphics[scale=.45]{rosctb}
+
+\end{center}
+
+
+\section{Ring Oscillator Transient Analysis}
+
+\begin{center}
+
+\includegraphics[scale=.45]{rosctran}
+
+\end{center}
+
+
+\section{Ring Oscillator Layout}
+
+\begin{center}
+
+\includegraphics[scale=.55]{rosclayout}
+
+\end{center}
+
+
+\section{Ring Oscillator DRC}
+
+\begin{center}
+
+\includegraphics[scale=.45]{roscdrc}
+
+\end{center}
+
+
+\section{Ring Oscillator LVS}
+
+\begin{center}
+
+\includegraphics[scale=.45]{rosclvs}
+
+\end{center}
+
+
+\section{Ring Oscillator LPE/Parasitics}
+
+\begin{center}
+
+\includegraphics[scale=.45]{rosclpe}
+
+\end{center}
+
+
+\section{Ring Oscillator Post Layout Simulation Transient Analysis}
+
+\begin{center}
+
+\includegraphics[scale=.45]{rosctran2}
+
+\end{center}
+
+
+\newpage
+
+\part{One Bit Full Adder}
+
+\section{One Bit Full Adder Schematic}
+
+\includegraphics[scale=.45]{obfaschem}
+
+\section{One Bit Full Adder Test Bench}
+
+\begin{center}
+
+\includegraphics[scale=.45]{obfatb}
+
+\end{center}
+
+\section{One Bit Full Adder Transient Analysis}
+
+\begin{center}
+    
+
+
+\includegraphics[scale=.45]{obfatran}
+
+\end{center}
+
+\section{One Bit Full Adder Layout}
+
+\begin{center}
+    
+
+
+\includegraphics[scale=.65]{obfalayout}
+
+\end{center}
+
+
+    
+\section{One Bit Full Adder DRC}
+
+\begin{center}
+
+\includegraphics[scale=.45]{obfadrc}
+
+\end{center}
+
+\section{One Bit Full Adder LVS}
+
+\begin{center}
+    
+\includegraphics[scale=.45]{obfalvs}
+
+\end{center}
+
+
+\section{One Bit Full Adder LPE/Parasitics}
+
+\begin{center}
+    
+\includegraphics[scale=.45]{obfalpe}
+
+    
+\end{center}
+
+
+\section{One Bit Full Adder Post Layout Simulation Transient Analysis}
+
+\begin{center}
+
+
+\includegraphics[scale=.45]{obfatran2}
+
+\end{center}
+
+\newpage
+
+
+\part{Four Bit Full Adder}
+
+\section{Four Bit Full Adder Schematic}
+
+\begin{center}
+    
+
+
+\includegraphics[scale=.45]{fbfaschem}
+
+\end{center}
+
+\section{Four Bit Full Adder Test Bench}
+
+\begin{center}
+    
+
+
+\includegraphics[scale=.45]{fbfatb}
+
+\end{center}
+
+\section{Four Bit Full Adder Transient Analysis}
+
+\begin{center}
+
+
+\includegraphics[scale=.45]{fbfatran}
+
+\end{center}
+
+\section{Four Bit Full Adder Layout}
+
+\begin{center}
+
+
+\includegraphics[scale=.65]{fbfalayout}
+
+\end{center}
+
+\section{Four Bit Full Adder DRC}
+
+\begin{center}
+
+\includegraphics[scale=.45]{fbfadrc}
+
+    
+\end{center}
+
+
+\section{Four Bit Full Adder LVS}
+
+\begin{center}
+    
+
+\includegraphics[scale=.45]{fbfalvs}
+
+
+\end{center}
+
+\section{Four Bit Full Adder LPE/Parasitics}
+
+\begin{center}
+    
+
+
+\includegraphics{fbfalpe}
+
+\end{center}
+
+\section{Four Bit Full Adder Post Layout Simulation Transient Analysis}
+
+\begin{center}
+    
+
+
+\includegraphics[scale=.45]{fbfatran2}
+
+\end{center}
+
+\newpage
+
+
+
+
+\part{Problems Encountered}
+
+Any problems encountered in the lab were due to unfamiliarity with working with LPE. I had to move files around and complete several different tasks to absolve some LPE errors. This resulted in me having to demo on February 27, 2018. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
