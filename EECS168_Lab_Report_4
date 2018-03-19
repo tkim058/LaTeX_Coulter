@@ -1,0 +1,194 @@
+\documentclass{article}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{amsmath}
+
+\usepackage[margin=1.0in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage[table]{xcolor}
+\setlength\parindent{0pt}
+\begin{document}
+
+\begin{center}
+
+\LARGE
+{\textbf{\underline{EECS 168 Laboratory Report 4}}}  \break
+
+\Large
+
+\textbf{Name: Coulter Mulvihill}  \break
+
+
+
+
+\text
+
+\end{center}
+
+\newpage
+
+\part{Summary}
+
+In this lab, we will be going through the process of an IC chip design. We will be performing this process twice - one for a counter and one for a GCD. We will learn to use verilog to simualte different logical elements as well as use the DC shell, IC shell, and PT shell to create layouts and floor plans as well as to test them. These are all aspects of the Synopsys Design Toolkit. Beyond this, we will learn how to do RTL with HDL for EDA. 
+
+\newpage
+
+\part{Week 1}
+
+\section{Verilog Answers}
+
+
+\includegraphics[scale=.7]{Written}
+
+\includegraphics[scale=.7]{2426}
+
+\includegraphics[scale=.7]{4145}
+
+\includegraphics[scale=.7]{5558}
+
+\section{Simulation Result of Example Counter}
+
+\begin{center}
+
+\includegraphics[scale=.5]{synth}
+    
+\includegraphics[scale=.5]{1compiles}
+
+
+
+    
+\end{center}
+
+\section{Result of gate-level for 4-bit full adder}
+
+\includegraphics[scale=.5]{simv}
+
+\section{Final layout for 4-bit adder}
+
+\begin{center}
+    
+\includegraphics[scale=.5]{finallayout}
+    
+\end{center}
+
+\part{Week 2}
+
+\section{DC Analysis Confirmation}
+
+\begin{center}
+    \includegraphics[scale=.7]{2analyzedc}
+\end{center}
+
+\section{DC Link Confirmation}
+
+\begin{center}
+    \includegraphics[scale=.7]{2checklinkdc}
+\end{center}
+
+\section{DC Elaboration Confirmation}
+
+\begin{center}
+    \includegraphics[scale=.7]{2elaboratedc}
+\end{center}
+
+\section{Final GCD Layout}
+
+\begin{center}
+    \includegraphics[scale=.5]{2layout}
+\end{center}
+
+
+\part{Week 3}
+
+\section{Timing Report}
+
+\begin{center}
+    \includegraphics[scale=.6]{reporttiming1}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=.6]{reporttiming2}
+\end{center}
+
+\section{Area Report}
+
+\begin{center}
+    \includegraphics[scale=.6]{reporthierarchy}
+\end{center}
+
+\section{Power Analysis Report}
+
+\begin{center}
+    \includegraphics[scale=.6]{reportpower}
+\end{center}
+
+\section{Standard Cell Area Report}
+
+\begin{center}
+    \includegraphics[scale=.6]{reportreference}
+\end{center}
+
+\section{Design Resource Report}
+
+\begin{center}
+    \includegraphics[scale=.6]{reportresource1}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=.6]{reportresource2}
+\end{center}
+
+
+\section{Post Analysis with Primetime}
+
+\begin{center}
+    \includegraphics[scale=.6]{reportpt}
+\end{center}
+
+\newpage
+
+\part{Problems Encountered}
+
+No significant problems were encountered during the course of the lab. Some of the minor problems that were encountered had to do with library selection. For example, it was not initially explained that we had to delete the reference to "yourlibrary.db" before adding the necessary library and that caused some delays in lab completion. Also, the server was having some issues during certain points in the process. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
